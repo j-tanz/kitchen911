@@ -1,0 +1,28 @@
+body{
+    margin:0;
+}
+
+.navbar {
+    padding:10px;
+}
+.jumbotron{
+    text-align: center;
+}
+
+#resultsBox{
+    background: rgb(235, 235, 235);
+    padding:10px;
+    height:300px;
+    border-style: hidden;
+    border-radius: 8px 8px 8px 8px;
+    border-width: thin rgb(3, 3, 3);
+    border-bottom-width:thin;
+    border-top-width:thin;
+    border-left-width:thin;
+    border-right-width:thin;
+}
+footer{
+    background: rgb(235, 235, 235);
+    padding:10px;
+    margin-top: 60px;
+}
