@@ -19,6 +19,7 @@ $(document).ready(function(){
               foodObj[recipeSearch] = {
                   rID: JSON.parse(response).recipes[0].recipe_id                 
               } 
+            //   console.log(foodObj[recipeSearch].rID);
               lookUpId();       
         });
 
@@ -34,15 +35,17 @@ $(document).ready(function(){
               recipeObj[0] = {
                   imgURL: JSON.parse(result).recipe.image_url,
                   title: JSON.parse(result).recipe.title,
-                  ingredients: JSON.parse(result).recipe.ingredients
+                  ingredients: JSON.parse(result).recipe.ingredients,
+                //   rId: JSON.parse(result).recipe.rId
               }
-console.log(recipeObj["0"]);
+// console.log(recipeObj["0"]);
             function addNewDiv() {
                 var newDiv = $("<div>");
-                newDiv.attr({
-                    "id": "Div" + recipeObj["0"].title
-                })
+                newDiv.attr("id", "div" + foodObj[recipeSearch].rID);
+                var divElement = document.getElementById(newDiv.id);
+                console.log("newDiv", newDiv);
                 $("#resultsBox").append(newDiv);
+                
                 
                 // var newDiv = document.createElement("div");
 
@@ -52,7 +55,7 @@ console.log(recipeObj["0"]);
                 return newDiv;
             }
             // console.log(newDiv);
-            addNewDiv();
+            var renderDiv = addNewDiv();
         
 
             var recipeIMG = $("<img>");
@@ -63,11 +66,14 @@ console.log(recipeObj["0"]);
             // newDiv.attr()
 
             recipeIMG.attr("src", recipeObj["0"].imgURL);
-            recipeIMG.attr("style","height: 75px; width: 75px; float: left" )
-            $("#resultsBox").append(recipeIMG);
+            recipeIMG.attr("style","height: 250px; width: 250px" )
+            
+            console.log("newDiv2", renderDiv);
+
+            renderDiv.append(recipeIMG);
 
             recipeTitle.text(recipeObj["0"].title);
-            $("#resultsBox").append(recipeTitle);
+            renderDiv.append(recipeTitle);
 
 
 
