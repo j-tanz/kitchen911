@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var foodObj = {};
     var recipeObj = {};
+    var idArr = [];
 
 //This should trigger search on enter keypress but wont work?  Tried moving it all over too...
     var input = document.getElementById("searchTerm");
@@ -26,25 +27,29 @@ $(document).ready(function(){
             }
           }).then(function (response) {
               foodObj[recipeSearch] = {
-                  rID: JSON.parse(response).recipes[0].recipe_id                 
+                  rID0: JSON.parse(response).recipes[0].recipe_id,                 
+                  rID1: JSON.parse(response).recipes[1].recipe_id,               
+                  rID2: JSON.parse(response).recipes[2].recipe_id,                 
+                  rID3: JSON.parse(response).recipes[3].recipe_id                 
               } 
               lookUpId();       
         });
-
     function lookUpId() {
-        $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/' + getURL,
-            method: 'GET',
-            data:{
-                key: "ffeb038edfff951ae133911feb4ba4ae",
-                rId: foodObj[recipeSearch].rID
-            }
-          }).done(function(result){
-              recipeObj[0] = {
-                  imgURL: JSON.parse(result).recipe.image_url,
-                  title: JSON.parse(result).recipe.title,
-                  ingredients: JSON.parse(result).recipe.ingredients
-              }
+        var idArr = [foodObj[recipeSearch].rID0, foodObj[recipeSearch].rID1, foodObj[recipeSearch].rID2, foodObj[recipeSearch].rID3];
+        for(var i = 0; i < idArr.length; i++){
+            $.ajax({
+                url: 'https://cors-anywhere.herokuapp.com/' + getURL,
+                method: 'GET',
+                data:{
+                    key: "ffeb038edfff951ae133911feb4ba4ae",
+                    rId: idArr[i]
+                }
+            }).done(function(result){
+                recipeObj[0] = {
+                    imgURL: JSON.parse(result).recipe.image_url,
+                    title: JSON.parse(result).recipe.title,
+                    ingredients: JSON.parse(result).recipe.ingredients
+                }
 // Function to create a new <div/> & assignId = "div"rId 
             function addNewDiv() {
                 var newDiv = $("<div>");
@@ -68,8 +73,9 @@ $(document).ready(function(){
 //Title
             recipeTitle.text(recipeObj["0"].title);
             recipeTitle.attr("class", "recipeDesc")
-            renderDiv.append(recipeTitle);
-          });
+            renderDiv.append(recipeTitle);   
+                });
+            }    
         }
     });
 });
