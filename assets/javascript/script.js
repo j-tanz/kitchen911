@@ -2,6 +2,15 @@ $(document).ready(function(){
     var foodObj = {};
     var recipeObj = {};
 
+//This should trigger search on enter keypress but wont work?  Tried moving it all over too...
+    var input = document.getElementById("searchTerm");
+    input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            document.getElementById("searchBttn").click();
+        }
+    })
+
     $("#searchBttn").on("click", function(event){
         event.preventDefault();
         var recipeSearch = $("#searchTerm").val().trim();
@@ -19,7 +28,6 @@ $(document).ready(function(){
               foodObj[recipeSearch] = {
                   rID: JSON.parse(response).recipes[0].recipe_id                 
               } 
-            //   console.log(foodObj[recipeSearch].rID);
               lookUpId();       
         });
 
@@ -35,51 +43,38 @@ $(document).ready(function(){
               recipeObj[0] = {
                   imgURL: JSON.parse(result).recipe.image_url,
                   title: JSON.parse(result).recipe.title,
-                  ingredients: JSON.parse(result).recipe.ingredients,
-                //   rId: JSON.parse(result).recipe.rId
+                  ingredients: JSON.parse(result).recipe.ingredients
               }
-// console.log(recipeObj["0"]);
+// Function to create a new <div/> & assignId = "div"rId 
             function addNewDiv() {
                 var newDiv = $("<div>");
                 newDiv.attr("id", "div" + foodObj[recipeSearch].rID);
+                newDiv.attr("class", "well col-xs-12 col-md-6 result");
                 var divElement = document.getElementById(newDiv.id);
-                console.log("newDiv", newDiv);
-                $("#resultsBox").append(newDiv);
-                
-                
-                // var newDiv = document.createElement("div");
-
-                // $("#resultsBox").append("<div>").attr('id= div' + recipeObj["0"].title);
-                // $("#resultsBox").append("<div>");
-                // $(this).attr('id', "div_" + recipeObj[0].title);
+                $("#resultAppend").append(newDiv);
                 return newDiv;
             }
-            // console.log(newDiv);
             var renderDiv = addNewDiv();
-        
-
             var recipeIMG = $("<img>");
             var ingredientList = $("<ul>");
             var recipeTitle = $("<h4>");
             var ingredientArr = [];
 
-            // newDiv.attr()
-
+// Append Ajax results to DOM
+//Image
             recipeIMG.attr("src", recipeObj["0"].imgURL);
-            recipeIMG.attr("style","height: 250px; width: 250px" )
-            
-            console.log("newDiv2", renderDiv);
-
+            recipeIMG.attr("style","height: 250px; width: 250px; margin-left: auto; margin-right: auto; display: block" )
             renderDiv.append(recipeIMG);
-
+//Title
             recipeTitle.text(recipeObj["0"].title);
+            recipeTitle.attr("class", "recipeDesc")
             renderDiv.append(recipeTitle);
-
-
-
-
-
-
+          });
+        }
+    });
+});
+   
+// WE MAY STILL NEED THIS LATER:
             // $.each(recipeObj[0].ingredients, function() {
             //     for ( var i = 0; i < recipeObj[0].ingredients.length; i++ ) {
             //     $('ul').append("<li><h6 class='ingredientsList'"> + recipeObj[0].ingredients[i] + "</h6></li>");
@@ -87,16 +82,6 @@ $(document).ready(function(){
 
             //     }
             // })
-            // console.log(recipeObj.imgURL);
-
-            // console.log(recipeObj);
-
-            //   console.log(recipeObj[JSON.parse(response).recipes[0].recipe_id]); 
-          });
-        }
-    });
-});
-   
 
 
 
