@@ -34,3 +34,16 @@ footer{
     font-weight: bold;
     text-align: center;
 }
+
+.starSpan {
+    font-size: 40px;
+    position: absolute;
+    float: left;
+}
+
+.trashSpan {
+    font-size: 40px;
+    position: relative;
+    margin-left: auto;
+    float: right;
+}
