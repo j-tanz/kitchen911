@@ -4,11 +4,10 @@ $(document).ready(function(){
     var resultArr = [];
 
 //This should trigger search on enter keypress but wont work?  Tried moving it all over too...WTF!!!
-    var input = document.getElementById("searchTerm");
-    input.addEventListener("keyup", function(event) {
+    $(document).on("keyup", function(event){
         event.preventDefault();
         if (event.keyCode === 13) {
-            document.getElementById("searchBttn").click();
+            $("#searchBttn").click();
         }
     })
 
@@ -77,6 +76,7 @@ $(document).ready(function(){
             insideDiv.append(starSpan);
 //trash
             trashSpan.attr("class", "glyphicon glyphicon-trash trashSpan media-right");
+            trashSpan.attr("id", "trash" + recipeObj.rID);
             insideDiv.append(trashSpan);
 //Image
             recipeIMG.attr("src", recipeObj.imgURL);
@@ -85,7 +85,12 @@ $(document).ready(function(){
 //Title
             recipeTitle.text(recipeObj.title);
             recipeTitle.attr("class", "recipeDesc");
-            renderDiv.append(recipeTitle);   
+            renderDiv.append(recipeTitle);  
+//trash a result                  
+            $(document).on("click", ".trashSpan", function(){
+                $(this).parents().eq(1).remove();
+                console.log(this);
+    })
                 });
             }    
         }
