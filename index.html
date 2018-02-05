@@ -9,6 +9,13 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="assets/javascript/script.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <!-- Firechat -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+    <!-- bootstrap script file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Kitchen911</title>
 </head>
 <body>
@@ -57,11 +64,47 @@
         </div>
     </div>
     <footer class="container-fluid text-center">
-        <a href="index.html" title="To Top">
-          <span class="glyphicon glyphicon-chevron-up"></span>
-        </a>
+        <div class="dropup">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Chat With a Chef
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <div id="firechat-wrapper"></div>
+                </ul>
+        </div>
         <p>Copyright @ JSJ 2018</p> 
     </footer>
+    <!-- CODE CREDIT TO MIT -->
+    <script type="text/javascript">
+        // Initialize Firebase SDK
+        // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDT32Zn49c358zhzpUVWbhMM0gs_FTjbHk",
+        authDomain: "kitchen-911.firebaseapp.com",
+        databaseURL: "https://kitchen-911.firebaseio.com",
+        projectId: "kitchen-911",
+        storageBucket: "kitchen-911.appspot.com",
+        messagingSenderId: "416579002605"
+      };
+      firebase.initializeApp(config);
+        // Get a reference to the Firebase Realtime Database
+        var chatRef = firebase.database().ref();
+        // Create an instance of Firechat
+        var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+        // Listen for authentication state changes
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // If the user is logged in, set them as the Firechat user
+            chat.setUser(user.uid, "Anonymous" + user.uid.substr(10, 8));
+          } else {
+            // If the user is not logged in, sign them in anonymously
+            firebase.auth().signInAnonymously().catch(function(error) {
+              console.log("Error signing user in anonymously:", error);
+            });
+          }
+          
+        });
+      </script>
     
     
 </body>
