@@ -68,6 +68,7 @@ $(document).ready(function(){
             var ingredientArr = [];
             var insideDiv = $("<div>");
             var anchor = $("<a>");
+            var popupDiv = $("<div>");
             
             
 
@@ -94,7 +95,19 @@ $(document).ready(function(){
             recipeIMG.attr("class", "mouseOn linkUrl");
             recipeIMG.attr("style","height: 250px; width: 250px; margin-left: auto; margin-right: auto; display: block" );
             anchor.append(recipeIMG);
-            console.log(recipeObj.source);
+//popup
+            popupDiv.text(recipeObj.ingredients);
+            popupDiv.attr("class", "popUpDiv");
+            popupDiv.attr("id", "pop" + recipeObj.rID);
+            renderDiv.append(popupDiv);
+
+            $(document).on("mouseover", ".mouseOn", function() {
+                console.log("over", $(this).parent().siblings(".popUpDiv"));
+                $(this).parent().siblings(".popUpDiv").hide();
+            }).mouseout(function() {
+                $(this).parent().siblings(".popUpDiv").show();
+            });
+            console.log(this);
 //Title
             recipeTitle.text(recipeObj.title);
             recipeTitle.attr("class", "recipeDesc");
@@ -122,7 +135,7 @@ $(document).ready(function(){
             //     aOk.innerHTML = "Click here";
 
 
-                // var popupDiv = $("<div>");
+                // 
                 // popupDiv.attr("id", "popup" + recipeObj.rID);
                 // ingredientList.text(recipeObj.ingredients);
                 // popupDiv.append(ingredientList);
