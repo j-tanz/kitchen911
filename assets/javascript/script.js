@@ -29,7 +29,7 @@ $(document).ready(function(){
                 for (var i = 0; i < numSearch; i++){
                     resultArr[i] = JSON.parse(response).recipes[i].recipe_id                                  
                 }    
-                lookUpId();        
+                lookUpId();       
             });
               
     function lookUpId() {
@@ -46,9 +46,10 @@ $(document).ready(function(){
                     imgURL: JSON.parse(result).recipe.image_url,
                     title: JSON.parse(result).recipe.title,
                     ingredients: JSON.parse(result).recipe.ingredients,
-                    rID: JSON.parse(result).recipe.recipe_id
+                    rID: JSON.parse(result).recipe.recipe_id,
+                    source: JSON.parse(result).recipe.source_url
                 }
-                // console.log(recipeObj);
+                // console.log(result);
 // Function to create a new <div/> & assignId = "div"rId#
             function addNewDiv() {
                 var newDiv = $("<div>");
@@ -66,8 +67,14 @@ $(document).ready(function(){
             var recipeTitle = $("<h4>");
             var ingredientArr = [];
             var insideDiv = $("<div>");
+            var anchor = $("<a>");
+            
+            
 
 // Append Ajax results to DOM
+//popup div
+
+            
 //insidediv 
             insideDiv.attr("style", "position: relative; margin: 25px;")
             renderDiv.append(insideDiv);
@@ -78,10 +85,16 @@ $(document).ready(function(){
             trashSpan.attr("class", "glyphicon glyphicon-trash trashSpan media-right");
             trashSpan.attr("id", "trash" + recipeObj.rID);
             insideDiv.append(trashSpan);
-//Image
+//Image     
+            anchor.attr("href", recipeObj.source);
+            anchor.attr("target", "_blank");
+            renderDiv.append(anchor);
+            recipeIMG.attr("id", "IMG" + recipeObj.rID);
             recipeIMG.attr("src", recipeObj.imgURL);
+            recipeIMG.attr("class", "mouseOn linkUrl");
             recipeIMG.attr("style","height: 250px; width: 250px; margin-left: auto; margin-right: auto; display: block" );
-            renderDiv.append(recipeIMG);
+            anchor.append(recipeIMG);
+            console.log(recipeObj.source);
 //Title
             recipeTitle.text(recipeObj.title);
             recipeTitle.attr("class", "recipeDesc");
@@ -89,14 +102,59 @@ $(document).ready(function(){
 //trash a result                  
             $(document).on("click", ".trashSpan", function(){
                 $(this).parents().eq(1).remove();
-                console.log(this);
-    })
+            })
+
+            // $("#pdf1img").wrap($('<a>',{
+            //     href: '/Content/pdf/' + data.pdf1
+            //  }));
+
+
+
+
+            // $(document).on("click", ".linkUrl", function(){
+
+            // } )
+
+            // $(document).on("mouseover", ".mouseOn", function(){
+            //     var popup = open("", "Popup", "width=300,height=200");
+            //     var txtOk = popup.document.createElement("TEXTAREA");
+            //     var aOk = popup.document.createElement("a");
+            //     aOk.innerHTML = "Click here";
+
+
+                // var popupDiv = $("<div>");
+                // popupDiv.attr("id", "popup" + recipeObj.rID);
+                // ingredientList.text(recipeObj.ingredients);
+                // popupDiv.append(ingredientList);
+            // })
+
+
                 });
             }    
         }
     });
 });
 
+// <div id="id01" class="w3-modal">
+//     <div class="w3-modal-content">
+//       <div class="w3-container">
+//         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+//         <p>Some text. Some text. Some text.</p>
+//         <p>Some text. Some text. Some text.</p>
+//       </div>
+//     </div>
+//   </div>
+
+
+// function createPopup(){
+//     var popup = open("", "Popup", "width=300,height=200");
+//     var txtOk = popup.document.createElement("TEXTAREA");
+//     var aOk = popup.document.createElement("a");
+//     aOk.innerHTML = "Click here";
+    
+//     popup.document.body.appendChild(txtOk);
+//     popup.document.body.appendChild(aOk);
+//     }
    
 
 
