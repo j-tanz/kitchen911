@@ -69,6 +69,7 @@ $(document).ready(function(){
             var insideDiv = $("<div>");
             var anchor = $("<a>");
             var popupDiv = $("<div>");
+            var buttonDiv = $("<div>");
             
 // Append Ajax results to DOM
 //popup div
@@ -92,19 +93,19 @@ $(document).ready(function(){
             recipeIMG.attr("class", "mouseOn linkUrl");
             recipeIMG.attr("style","height: 250px; width: 250px; margin-left: auto; margin-right: auto; display: block" );
             anchor.append(recipeIMG);
-//popup
-            popupDiv.text(recipeObj.ingredients);
-            popupDiv.attr("class", "popUpDiv");
-            popupDiv.attr("id", "pop" + recipeObj.rID);
-            renderDiv.append(popupDiv);
-
-            $(document).on("mouseover", ".mouseOn", function() {
-                // console.log("over", $(this).parent().siblings(".popUpDiv"));
-                $(this).parent().siblings(".popUpDiv").hide();
-            }).mouseout(function() {
-                $(this).parent().siblings(".popUpDiv").show();
-            });
-            // console.log(this);
+// Ingredients Button
+            var newButton = $("<button>");
+            newButton.attr("id", "button" + recipeObj.rID);
+            newButton.text("ingredients");
+            newButton.attr("class", "btn btn-default");
+            newButton.attr("data-toggle","popover");
+            newButton.attr("title","Ingredients");
+            newButton.attr("data-content", recipeObj.ingredients);
+            newButton.attr("style", "margin-left: auto; margin-right: auto; display: block" );
+            renderDiv.append(newButton);
+            $('[data-toggle="popover"]').popover()
+        
+        
 //Title
             recipeTitle.text(recipeObj.title);
             recipeTitle.attr("class", "recipeDesc");
@@ -142,42 +143,9 @@ $(document).ready(function(){
         }
         var boxSave = addNewSave();
 
-        // function addToBox() {
-            // boxSave.append(storeThis);
-        // }
-        
-})
-
-    // if(localStorage.getItem(storedRecipes.indexOf(storeThis)) === -1 )
-
-
-
-
+    })
 
 });
-
-// <div id="id01" class="w3-modal">
-//     <div class="w3-modal-content">
-//       <div class="w3-container">
-//         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-//         <p>Some text. Some text. Some text.</p>
-//         <p>Some text. Some text. Some text.</p>
-//       </div>
-//     </div>
-//   </div>
-
-
-// function createPopup(){
-//     var popup = open("", "Popup", "width=300,height=200");
-//     var txtOk = popup.document.createElement("TEXTAREA");
-//     var aOk = popup.document.createElement("a");
-//     aOk.innerHTML = "Click here";
-    
-//     popup.document.body.appendChild(txtOk);
-//     popup.document.body.appendChild(aOk);
-//     }
-   
-
 
 // WE MAY STILL NEED THIS LATER:
             // $.each(recipeObj[0].ingredients, function() {
