@@ -3,9 +3,11 @@ $(document).ready(function(){
     var numSearch = 0;
     var resultArr = [];
     var searchedArr = [];
-    var apiKey = "83e9f3d3227309240bf5d8a553b893c9"; //ffeb038edfff951ae133911feb4ba4ae
+    var APIkey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+    
 
-//This should trigger search on enter keypress but wont work?  Tried moving it all over too...WTF!!!
+
+//enter key submit
     $("#searchTerm").on("keyup", function(event){
         event.preventDefault();
         if (event.keyCode === 13) {
@@ -24,7 +26,7 @@ $(document).ready(function(){
             url: 'https://cors-anywhere.herokuapp.com/' + queryURL,
             method: "GET",
             data:{
-                key: apiKey,
+                key: APIkey,
                 q: recipeSearch
             }
         }).then(function (response) {
@@ -40,7 +42,7 @@ $(document).ready(function(){
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
-                    key: apiKey,
+                    key: APIkey,
                     rId: resultArr[i]
                 }
             }).done(function (result){
@@ -65,7 +67,7 @@ $(document).ready(function(){
             var starSpan = $("<span>");
             var trashSpan = $("<span>");
             var recipeIMG = $("<img>");
-            var ingredientList = $("<ul>");
+            var uList = $("<ul>");
             var recipeTitle = $("<h4>");
             var ingredientArr = [];
             var insideDiv = $("<div>");
@@ -74,7 +76,22 @@ $(document).ready(function(){
             var buttonDiv = $("<div>");
             
 // Append Ajax results to DOM
-//popup div
+//convert ingredients array to list
+            for ( var a = 0; a < recipeObj.ingredients.length; a++){
+                var listItem = $("<li></li>");
+                var singleIngredient = recipeObj.ingredients[a];
+
+                listItem.text(singleIngredient); 
+
+                uList.append(listItem);
+
+                }
+
+           
+
+
+            console.log(recipeObj.ingredients);
+
       
 //insidediv 
             insideDiv.attr("style", "position: relative; margin: 25px;")
@@ -102,10 +119,11 @@ $(document).ready(function(){
             newButton.attr("class", "btn btn-default");
             newButton.attr("data-toggle","popover");
             newButton.attr("title","Ingredients");
-            newButton.attr("data-content", recipeObj.ingredients);
-            newButton.attr("style", "margin-left: auto; margin-right: auto; display: block" );
+            newButton.attr("data-content", uList.html());
+            newButton.attr("style", "margin-left: auto; margin-right: auto; display: block;");
             renderDiv.append(newButton);
-            $('[data-toggle="popover"]').popover()
+            $('[data-toggle="popover"]').popover({ html : true, content : uList});
+            
 //history ARR 
             var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
 
@@ -159,16 +177,6 @@ $(document).ready(function(){
 });
 
 // WE MAY STILL NEED THIS LATER:
-            // $.each(recipeObj[0].ingredients, function() {
-            //     for ( var i = 0; i < recipeObj[0].ingredients.length; i++ ) {
-            //     $('ul').append("<li><h6 class='ingredientsList'"> + recipeObj[0].ingredients[i] + "</h6></li>");
-            //     $("resultsBox").append(ingredientList);
-
-            //     }
-            // })
-
-
-
             // $("#pdf1img").wrap($('<a>',{
             //     href: '/Content/pdf/' + data.pdf1
             //  }));

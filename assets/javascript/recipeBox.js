@@ -4,6 +4,8 @@ $(document).ready(function(){
     var getURL = "http://food2fork.com/api/get";
     var recipeObj = [];
     var ID;
+    var APIkey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+
     
     // console.log("idArray", storedRecipes);
 
@@ -15,7 +17,7 @@ $(document).ready(function(){
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
-                    key: "ffeb038edfff951ae133911feb4ba4ae",
+                    key: APIkey,
                     rId: ID
                 },
             }).done(function (result){
