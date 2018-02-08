@@ -94,7 +94,7 @@ $(document).ready(function(){
 
       
 //insidediv 
-            insideDiv.attr("style", "position: relative; margin: 25px;")
+            insideDiv.attr("style", "position: absolute; margin: 25px;")
             renderDiv.append(insideDiv);
 //Star      
             starSpan.attr("class", "glyphicon glyphicon-star-empty starSpan");
@@ -106,6 +106,7 @@ $(document).ready(function(){
 //Image     
             anchor.attr("href", recipeObj.source);
             anchor.attr("target", "_blank");
+            anchor.attr("style", "position: relative; height: 100%; width: 100%;")
             renderDiv.append(anchor);
             recipeIMG.attr("id", "IMG" + recipeObj.rID);
             recipeIMG.attr("src", recipeObj.imgURL);
@@ -122,7 +123,7 @@ $(document).ready(function(){
             newButton.attr("data-content", uList.html());
             newButton.attr("style", "margin-left: auto; margin-right: auto; display: block;");
             renderDiv.append(newButton);
-            $('[data-toggle="popover"]').popover({ html : true, content : uList});
+            $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});
             
 //history ARR 
             var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
