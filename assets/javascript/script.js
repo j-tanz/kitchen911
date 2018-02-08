@@ -3,6 +3,7 @@ $(document).ready(function(){
     var numSearch = 0;
     var resultArr = [];
     var searchedArr = [];
+    var apiKey = "83e9f3d3227309240bf5d8a553b893c9"; //ffeb038edfff951ae133911feb4ba4ae
 
 //This should trigger search on enter keypress but wont work?  Tried moving it all over too...WTF!!!
     $("#searchTerm").on("keyup", function(event){
@@ -23,7 +24,7 @@ $(document).ready(function(){
             url: 'https://cors-anywhere.herokuapp.com/' + queryURL,
             method: "GET",
             data:{
-                key: "ffeb038edfff951ae133911feb4ba4ae",
+                key: apiKey,
                 q: recipeSearch
             }
         }).then(function (response) {
@@ -39,7 +40,7 @@ $(document).ready(function(){
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
-                    key: "ffeb038edfff951ae133911feb4ba4ae",
+                    key: apiKey,
                     rId: resultArr[i]
                 }
             }).done(function (result){
