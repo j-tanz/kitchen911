@@ -4,8 +4,12 @@ $(document).ready(function(){
     var getURL = "http://food2fork.com/api/get";
     var recipeObj = [];
     var ID;
+<<<<<<< HEAD
     var APIkey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
 
+=======
+    var apiKey = "83e9f3d3227309240bf5d8a553b893c9"; //ffeb038edfff951ae133911feb4ba4ae
+>>>>>>> e950b557422ed3723bf122550717e5de70d53f7e
     
     // console.log("idArray", storedRecipes);
 
@@ -17,7 +21,11 @@ $(document).ready(function(){
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
+<<<<<<< HEAD
                     key: APIkey,
+=======
+                    key: apiKey,
+>>>>>>> e950b557422ed3723bf122550717e5de70d53f7e
                     rId: ID
                 },
             }).done(function (result){
@@ -77,7 +85,7 @@ $(document).ready(function(){
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
-                    key: "ffeb038edfff951ae133911feb4ba4ae",
+                    key: apiKey,
                     rId: ID
                 },
             }).done(function (result){
