@@ -2,16 +2,45 @@ body{
     margin:0;
 }
 
-.navbar {
+.navbar-custom {
     padding:10px;
     border-radius: 0 !important;
+    background-color: rgb(36, 35, 35);
+    border-bottom: 3px solid rgb(177, 42, 42);
+    margin-bottom: 0;
+    color:white;
 }
-.jumbotron{
+.jumbotron {
     text-align: center;
+    margin-bottom: 0;
+    height: 400px;
+    background-image: url("http://www.fitgirlcode.com/wp-content/uploads/2015/01/462812_ovoshhi_stol_lozhki_derevyannye_griby_perec_kapust_1680x1050_www.GdeFon.ru_.jpg");
+    background-position: center;
+    color: rgb(221, 220, 220);
+    text-shadow: rgb(46, 44, 44) 0.4em 0.4em 0.4em;
+    padding-top: 120px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+span {
+    color:rgb(177, 42, 42);
+}
+.trashSpan{
+    color:black;
+}
+.starSpan{
+    color: black;
+}
+
+#formContainer {
+    background-color: rgb(36, 35, 35);
+    padding:20px;
+    border-radius: 0 !important;
+    border-bottom: 3px solid rgb(177, 42, 42);
 }
 
 #resultsBox{
-    background: rgb(235, 235, 235);
+    background-color: rgb(36, 35, 35);
     padding:10px;
     border-style: hidden;
     border-radius: 8px 8px 8px 8px;
@@ -24,7 +53,7 @@ body{
 }
 
 #favoritesBox{
-    background: rgb(235, 235, 235);
+    background: rgb(36, 35, 35);
     padding:10px;
     border-style: hidden;
     border-radius: 8px 8px 8px 8px;
@@ -37,7 +66,7 @@ body{
 }
 
 #historyBox{
-    background: rgb(235, 235, 235);
+    background: rgb(36, 35, 35);
     padding:10px;
     border-style: hidden;
     border-radius: 8px 8px 8px 8px;
@@ -49,12 +78,14 @@ body{
     margin-bottom: 100px;
 }
 footer{
-    background: rgb(235, 235, 235);
-    padding:10px;
+    background-color: rgb(36, 35, 35);
+    padding:20px;
     margin-top: 60px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: #ccc;
+    border-top: 3px solid rgb(177, 42, 42);
 }
 
 .recipeDesc {
