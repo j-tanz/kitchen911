@@ -1,0 +1,84 @@
+$(document).ready(function(){
+    var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
+    var getURL = "http://food2fork.com/api/get";
+    var recipeObj = [];
+    var ID;
+    
+    // console.log("idArray", storedRecipes);
+
+    if (storedRecipes !== []){
+        for ( var i = 0 ; i < storedRecipes.length; i++ ) {
+            var ID = storedRecipes[i]
+            console.log("RID[i]", storedRecipes[i]);
+            $.ajax({
+                url: 'https://cors-anywhere.herokuapp.com/' + getURL,
+                method: 'GET',
+                data:{
+                    key: "ffeb038edfff951ae133911feb4ba4ae",
+                    rId: ID
+                },
+            }).done(function (result){
+                recipeObj =  {
+                    imgURL: JSON.parse(result).recipe.image_url,
+                    title: JSON.parse(result).recipe.title,
+                    ingredients: JSON.parse(result).recipe.ingredients,
+                    rID: JSON.parse(result).recipe.recipe_id,
+                    source: JSON.parse(result).recipe.source_url
+                }
+// console.log(result);
+            
+            function addNewDiv() {
+                var newDiv = $("<div>");
+                newDiv.attr("id", recipeObj.rID);
+                newDiv.attr("class", "well col-xs-12 result");
+                newDiv.attr("style", "position: relative;");
+                $("#resultAppend").append(newDiv);
+                return newDiv;
+            }
+            var renderDiv = addNewDiv();
+            var recipeIMG = $("<img>");
+            var ingredientList = $("<ul>");
+            var recipeTitle = $("<h4>");
+            var ingredientArr = [];
+            var anchor = $("<a>");
+            var trashSpan = $("<span>");
+
+            anchor.attr("href", recipeObj.source);
+            anchor.attr("target", "_blank");
+            renderDiv.append(anchor);
+            recipeIMG.attr("id", "IMG" + recipeObj.rID);
+            recipeIMG.attr("src", recipeObj.imgURL);
+            recipeIMG.attr("class", "mouseOn linkUrl");
+            recipeIMG.attr("style","height: 125px; width: 125px; margin-left: auto; margin-right: auto; display: block; float: left;" );
+            anchor.append(recipeIMG);
+
+            recipeTitle.text(recipeObj.title);
+            recipeTitle.attr("style", "font-size: 32px;")
+            recipeTitle.attr("class", "recipeDesc");
+            renderDiv.append(recipeTitle);  
+
+            trashSpan.attr("class", "glyphicon glyphicon-trash trashSpan");
+            trashSpan.attr("style", "font-size: 58px")
+            trashSpan.attr("id", "trash" + recipeObj.rID);
+            renderDiv.append(trashSpan);
+
+         
+            });
+        }
+    }      
+    
+    $(document).on("click", ".trashSpan", function(){
+        var removeThis = $(this).parents().eq(0).attr("id");
+        var removeIndex = storedRecipes.indexOf(removeThis);
+        storedRecipes.splice(removeIndex,1);
+        localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
+        $(this).parents().eq(0).remove();
+        
+        console.log("storedrecipes", storedRecipes);
+        
+    })
+
+
+
+})
+

@@ -127,21 +127,21 @@ $(document).ready(function(){
         if(storedRecipes.indexOf(storeThis) === -1){
             storedRecipes.push(storeThis);
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
-            addNewSave();  
+            // addNewSave();  
             // addToBox();
         }
         console.log(storedRecipes);
         console.log(storeThis);
 
-        function addNewSave() {
-            var newSave = $("<div>");
-            newSave.attr("id", storeThis);
-            newSave.attr("class", "well col-xs-12 col-md-6 savedR");
-            newSave.attr("style", "position: relative;");
-            $("#favoritesBox").append(newSave);
-            return newSave;
-        }
-        var boxSave = addNewSave();
+        // function addNewSave() {
+        //     var newSave = $("<div>");
+        //     newSave.attr("id", storeThis);
+        //     newSave.attr("class", "well col-xs-12 col-md-6 savedR");
+        //     newSave.attr("style", "position: relative;");
+        //     $("#favoritesBox").append(newSave);
+        //     return newSave;
+        // }
+        // var boxSave = addNewSave();
 
     })
 
