@@ -5,7 +5,7 @@ $(document).ready(function(){
     var searchedArr = [];
 
 //This should trigger search on enter keypress but wont work?  Tried moving it all over too...WTF!!!
-    $(document).on("keyup", function(event){
+    $("#searchTerm").on("keyup", function(event){
         event.preventDefault();
         if (event.keyCode === 13) {
             $("#searchBttn").click();
