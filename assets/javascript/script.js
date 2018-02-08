@@ -2,6 +2,7 @@ $(document).ready(function(){
     var recipeObj = {};
     var numSearch = 0;
     var resultArr = [];
+    var searchedArr = [];
 
 //This should trigger search on enter keypress but wont work?  Tried moving it all over too...WTF!!!
     $(document).on("keyup", function(event){
@@ -55,7 +56,7 @@ $(document).ready(function(){
                 var newDiv = $("<div>");
                 newDiv.attr("id", recipeObj.rID);
                 newDiv.attr("class", "well col-xs-12 col-md-6 result");
-                newDiv.attr("style", "position: relative;");
+                newDiv.attr("style", "position: relative; height: 420px;");
                 $("#resultAppend").append(newDiv);
                 return newDiv;
             }
@@ -104,7 +105,14 @@ $(document).ready(function(){
             newButton.attr("style", "margin-left: auto; margin-right: auto; display: block" );
             renderDiv.append(newButton);
             $('[data-toggle="popover"]').popover()
-        
+//history ARR 
+            var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
+
+            if(searchedArr.indexOf(recipeObj.rID) === -1){
+                searchedArr.push(recipeObj.rID);
+                localStorage.setItem("historyArr", JSON.stringify(searchedArr));
+                console.log(searchedArr);
+                }
         
 //Title
             recipeTitle.text(recipeObj.title);
@@ -116,6 +124,8 @@ $(document).ready(function(){
             })
 
                 });
+            
+
             }    
         }
     });

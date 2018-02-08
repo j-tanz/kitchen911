@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
+    var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
     var getURL = "http://food2fork.com/api/get";
     var recipeObj = [];
     var ID;
@@ -9,7 +10,7 @@ $(document).ready(function(){
     if (storedRecipes !== []){
         for ( var i = 0 ; i < storedRecipes.length; i++ ) {
             var ID = storedRecipes[i]
-            console.log("RID[i]", storedRecipes[i]);
+            // console.log("1", storedRecipes[i]);
             $.ajax({
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
@@ -25,7 +26,7 @@ $(document).ready(function(){
                     rID: JSON.parse(result).recipe.recipe_id,
                     source: JSON.parse(result).recipe.source_url
                 }
-// console.log(result);
+// console.log("where", result);
             
             function addNewDiv() {
                 var newDiv = $("<div>");
@@ -60,22 +61,65 @@ $(document).ready(function(){
             trashSpan.attr("class", "glyphicon glyphicon-trash trashSpan");
             trashSpan.attr("style", "font-size: 58px")
             trashSpan.attr("id", "trash" + recipeObj.rID);
-            renderDiv.append(trashSpan);
-
-         
+            renderDiv.append(trashSpan); 
             });
         }
-    }      
+    } 
+    if (searchedArr !== []){
+        for ( var i = 0 ; i < searchedArr.length; i++ ) {
+            var ID = searchedArr[i];
+            console.log("RID[i]",searchedArr[i]);
+            $.ajax({
+                url: 'https://cors-anywhere.herokuapp.com/' + getURL,
+                method: 'GET',
+                data:{
+                    key: "ffeb038edfff951ae133911feb4ba4ae",
+                    rId: ID
+                },
+            }).done(function (result){
+                recipeObj =  {
+                    imgURL: JSON.parse(result).recipe.image_url,
+                    title: JSON.parse(result).recipe.title,
+                    // ingredients: JSON.parse(result).recipe.ingredients,
+                    rID: JSON.parse(result).recipe.recipe_id,
+                    source: JSON.parse(result).recipe.source_url
+                }
+                // console.log("2", result);
+          
+            function addHistoryDiv() {
+                var newDiv = $("<div>");
+                newDiv.attr("id", recipeObj.rID);
+                newDiv.attr("class", "well col-xs-3 col-md-1 historyDiv");
+                newDiv.attr("style", "position: relative; height: 90px; width: 90px;");
+                $("#historyBox").append(newDiv);
+                return newDiv;
+            }
+            var historyRender = addHistoryDiv();
+            var anchor = $("<a>");
+            var recipeIMG = $("<img>");
+
+            anchor.attr("href", recipeObj.source);
+            anchor.attr("target", "_blank");
+            historyRender.append(anchor);
+            recipeIMG.attr("id", "IMG" + recipeObj.rID);
+            recipeIMG.attr("src", recipeObj.imgURL);
+            recipeIMG.attr("class", "historyItem");
+            recipeIMG.attr("style","height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;" );
+            anchor.append(recipeIMG);
+            // console.log(recipeObj);
+        })
+
+
+        }
+    }
     
     $(document).on("click", ".trashSpan", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
         storedRecipes.splice(removeIndex,1);
         localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
-        $(this).parents().eq(0).remove();
-        
-        console.log("storedrecipes", storedRecipes);
-        
+        $(this).parents().eq(0).remove();     
+        // console.log("storedrecipes", storedRecipes); 
     })
 
 
