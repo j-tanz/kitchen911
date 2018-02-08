@@ -50,16 +50,18 @@ $(document).ready(function(){
             recipeIMG.attr("id", "IMG" + recipeObj.rID);
             recipeIMG.attr("src", recipeObj.imgURL);
             recipeIMG.attr("class", "mouseOn linkUrl");
-            recipeIMG.attr("style","height: 125px; width: 125px; margin-left: auto; margin-right: auto; display: block; float: left;" );
+            recipeIMG.attr("style","height: 200px; width: 200px; margin-left: auto; margin-right: auto; display: block; float: left;" );
             anchor.append(recipeIMG);
+        
 
             recipeTitle.text(recipeObj.title);
-            recipeTitle.attr("style", "font-size: 32px;")
+            recipeTitle.attr("style", "font-size: 16px");
+            recipeTitle.attr("style", "text-align: right");
             recipeTitle.attr("class", "recipeDesc");
             renderDiv.append(recipeTitle);  
 
             trashSpan.attr("class", "glyphicon glyphicon-trash trashSpan");
-            trashSpan.attr("style", "font-size: 58px")
+            trashSpan.attr("style", "font-size: 16px");
             trashSpan.attr("id", "trash" + recipeObj.rID);
             renderDiv.append(trashSpan); 
             });
