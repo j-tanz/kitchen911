@@ -45,7 +45,7 @@
                         <button type="submit" class="btn btn-default" id ="filter">Filter</button>
                         <button type="submit" class="btn btn-default" id ="searchBttn">Search</button>
                         <select id="dropListNumResults">
-                            <!-- SEARCHING FOR ONLY 2 ITEMS IS BUGGY, KEEP FOR TESTING API LIMITING ONLY, REMOVE FOR FINAL -->
+<!-- SEARCHING FOR ONLY 2 ITEMS IS BUGGY, KEEP FOR TESTING API LIMITING ONLY, REMOVE FOR FINAL -->
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
@@ -97,7 +97,7 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             // If the user is logged in, set them as the Firechat user
-            chat.setUser(user.uid, "Chefrey" + user.uid.substr(10, 8));
+            chat.setUser(user.uid, "TANZ");
           } else {
             // If the user is not logged in, sign them in anonymously
             firebase.auth().signInAnonymously().catch(function(error) {
