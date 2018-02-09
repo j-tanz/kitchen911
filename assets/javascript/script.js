@@ -59,7 +59,7 @@ $(document).ready(function(){
                 var newDiv = $("<div>");
                 newDiv.attr("id", recipeObj.rID);
                 newDiv.attr("class", "well col-xs-12 col-md-6 result");
-                newDiv.attr("style", "position: relative; height: 420px;");
+                // newDiv.attr("style", "position: relative; height: 420px;");
                 $("#resultAppend").append(newDiv);
                 return newDiv;
             }
@@ -80,21 +80,12 @@ $(document).ready(function(){
             for ( var a = 0; a < recipeObj.ingredients.length; a++){
                 var listItem = $("<li></li>");
                 var singleIngredient = recipeObj.ingredients[a];
-
                 listItem.text(singleIngredient); 
-
                 uList.append(listItem);
-
                 }
-
-           
-
-
-            console.log(recipeObj.ingredients);
-
-      
+ 
 //insidediv 
-            insideDiv.attr("style", "position: relative; margin: 25px;")
+            insideDiv.attr("style", "position: absolute; margin: auto; width: 100%;")
             renderDiv.append(insideDiv);
 //Star      
             starSpan.attr("class", "glyphicon glyphicon-star-empty starSpan");
@@ -106,23 +97,24 @@ $(document).ready(function(){
 //Image     
             anchor.attr("href", recipeObj.source);
             anchor.attr("target", "_blank");
+            // anchor.attr("style", "position: absolute; height: 100%; width: 100%;")
             renderDiv.append(anchor);
             recipeIMG.attr("id", "IMG" + recipeObj.rID);
             recipeIMG.attr("src", recipeObj.imgURL);
-            recipeIMG.attr("class", "mouseOn linkUrl");
-            recipeIMG.attr("style","height: 250px; width: 250px; margin-left: auto; margin-right: auto; display: block" );
+            recipeIMG.attr("class", "mouseOn linkUrl recipeImgMain");
+            // recipeIMG.attr("style","height: 250px; width: 250px; margin-left: auto; margin-right: auto; display: block" );
             anchor.append(recipeIMG);
 // Ingredients Button
             var newButton = $("<button>");
             newButton.attr("id", "button" + recipeObj.rID);
-            newButton.text("ingredients");
+            newButton.text("Ingredients");
             newButton.attr("class", "btn btn-default");
             newButton.attr("data-toggle","popover");
             newButton.attr("title","Ingredients");
             newButton.attr("data-content", uList.html());
             newButton.attr("style", "margin-left: auto; margin-right: auto; display: block;");
             renderDiv.append(newButton);
-            $('[data-toggle="popover"]').popover({ html : true, content : uList});
+            $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});
             
 //history ARR 
             var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];

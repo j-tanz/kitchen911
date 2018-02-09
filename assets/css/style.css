@@ -91,19 +91,23 @@ footer{
 .recipeDesc {
     font-weight: bold;
     text-align: center;
+    font-size: 16px;
 }
 
 .starSpan {
-    font-size: 40px;
+    font-size: 48px;
     position: absolute;
     float: left;
+    left: 0;
 }
 
 .trashSpan {
     font-size: 40px;
-    position: relative;
+    position: absolute;
     margin-left: auto;
-    float: right;
+    right: 35px;
+    top: 5px;
+    /* float: right; */
 }
 
 #firechat-wrapper {
@@ -126,3 +130,44 @@ p{
     text-align: center;
 }
 
+.recipeImgMain {
+    height: 200px; 
+    width: 200px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+    margin-bottom: 10px;
+}
+
+.result {
+    position: relative; 
+    height: 350px;
+}
+
+.well {
+    background-color: rgba(226, 206, 206, 0.685);
+}
+
+@media (min-width: 450px) {
+    .recipeImgMain {
+        height: 250px; 
+        width: 250px;
+    } 
+
+    .result {
+        height: 420px;
+    }
+    .recipeDesc {
+        font-size: 24px;
+    }
+    .starSpan {
+        left: 10;
+        font-size: 60px;
+    }
+    
+    .trashSpan {
+        right: 45px;
+        font-size: 50px;
+    }
+    
+}
