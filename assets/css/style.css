@@ -110,6 +110,13 @@ footer{
     /* float: right; */
 }
 
+.trashSpan2 {
+    font-size: 50px;
+    position: absolute;
+    top: 50px;
+    right : 13%;
+}
+
 #firechat-wrapper {
     height: 475px;
     max-width: 325px;
@@ -148,6 +155,16 @@ p{
     background-color: rgba(226, 206, 206, 0.685);
 }
 
+#chickenCook{
+    color: rgb(255, 238, 0);
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 @media (min-width: 450px) {
     .recipeImgMain {
         height: 250px; 
@@ -170,4 +187,24 @@ p{
         font-size: 50px;
     }
     
+}
+
+@media (min-width: 735px){
+    .formLabel{
+        width: 75%;
+    }
+    .form-group {
+        width: 70%;
+    }  
+}
+
+@media (min-width: 992px){
+    .trashSpan2 {
+        right: 25px;
+        top: 40px;
+    }
+
+    .formLabel {
+        width: 100%;
+    }
 }
