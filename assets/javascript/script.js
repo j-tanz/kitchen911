@@ -148,44 +148,6 @@ $(document).ready(function(){
         if(storedRecipes.indexOf(storeThis) === -1){
             storedRecipes.push(storeThis);
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
-            // addNewSave();  
-            // addToBox();
         }
-        console.log(storedRecipes);
-        console.log(storeThis);
-
-        // function addNewSave() {
-        //     var newSave = $("<div>");
-        //     newSave.attr("id", storeThis);
-        //     newSave.attr("class", "well col-xs-12 col-md-6 savedR");
-        //     newSave.attr("style", "position: relative;");
-        //     $("#favoritesBox").append(newSave);
-        //     return newSave;
-        // }
-        // var boxSave = addNewSave();
-
     })
-
-});
-
-// WE MAY STILL NEED THIS LATER:
-            // $("#pdf1img").wrap($('<a>',{
-            //     href: '/Content/pdf/' + data.pdf1
-            //  }));
-
-            // $(document).on("click", ".linkUrl", function()
-            // } )
-            // $(document).on("mouseover", ".mouseOn", function(){
-            //     var popup = open("", "Popup", "width=300,height=200");
-            //     var txtOk = popup.document.createElement("TEXTAREA");
-            //     var aOk = popup.document.createElement("a");
-            //     aOk.innerHTML = "Click here";
-                // 
-                // popupDiv.attr("id", "popup" + recipeObj.rID);
-                // ingredientList.text(recipeObj.ingredients);
-                // popupDiv.append(ingredientList);
-            // })
-
-
-
-
+})
