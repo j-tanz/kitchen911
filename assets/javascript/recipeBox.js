@@ -1,20 +1,20 @@
+const APIKey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+
 $(document).ready(function(){
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
     var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
     var getURL = "http://food2fork.com/api/get";
     var recipeObj = [];
     var ID;
-    var APIkey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
 
     if (storedRecipes !== []){
         for ( var i = 0 ; i < storedRecipes.length; i++ ) {
             var ID = storedRecipes[i]
-            // console.log("1", storedRecipes[i]);
             $.ajax({
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
-                    key: APIkey,
+                    key: APIKey,
                     rId: ID
                 },
 
@@ -26,140 +26,188 @@ $(document).ready(function(){
                     rID: JSON.parse(result).recipe.recipe_id,
                     source: JSON.parse(result).recipe.source_url
                 }
-            
+
+                var anchor = $("<a>");
+                var commentDiv = $("<div class='form-group'>");
+                var commentKey = "save" + recipeObj.rID;
+                var formLabel = $("<label for='comment'></label>");
+                var formText = $("<textarea class='form-control commentSave' placeholder='My Comments:' rows='6'></textarea>");
+                var ingredientBtn = $("<button>");
+                var ingredientArr = [];
+                var ingredientList = $("<ul>");
+                var newButton = $("<button>");
+                var newDiv = $("<div>");
+                var recipeIMG = $("<img>");
+                var renderDiv = addNewDiv();
+                var trashSpan = $("<span>");
+                var uList = $("<ul>");
+
                 function addNewDiv() {
-                    var newDiv = $("<div>");
-                    newDiv.attr("id", recipeObj.rID);
-                    newDiv.attr("class", "well col-xs-12 saved");
-                    newDiv.attr("style", "position: relative;");
+                    newDiv.attr({
+                        id: recipeObj.rID,
+                        class: "well col-xs-12 saved",
+                        style: "position: relative;"
+                    });
                     $("#resultAppend").append(newDiv);
                     return newDiv;
                 }
-
-                var renderDiv = addNewDiv();
-                var recipeIMG = $("<img>");
-                var ingredientList = $("<ul>");
-                // var recipeTitle = $("<h4>");
-                var ingredientArr = [];
-                var anchor = $("<a>");
-                var trashSpan = $("<span>");
-                var commentDiv = $("<div class='form-group'>");
-                var formLabel = $("<label for='comment'></label>");
-                var formText = $("<textarea class='form-control commentSave' placeholder='My Comments:' rows='6'></textarea>");
-                var newButton = $("<button>");
-                var ingBtn = $("<button>");
-                var uList = $("<ul>");
 
                 for ( var a = 0; a < recipeObj.ingredients.length; a++){
                     var listItem = $("<li></li>");
                     var singleIngredient = recipeObj.ingredients[a];
                     listItem.text(singleIngredient); 
                     uList.append(listItem);
-                    }
-                    
-                anchor.attr("href", recipeObj.source);
-                anchor.attr("target", "_blank");
-                renderDiv.append(anchor);
-                recipeIMG.attr("id", "IMG" + recipeObj.rID);
-                recipeIMG.attr("src", recipeObj.imgURL);
-                recipeIMG.attr("class", "mouseOn linkUrl");
-                recipeIMG.attr("style","height: 200px; width: 200px; margin-left: auto; margin-right: auto; display: block; float: left; padding-right: 10px;" );
-                anchor.append(recipeIMG);
-            
-                // recipeTitle.text(recipeObj.title);
-                // recipeTitle.attr("style", "font-size: 16px; text-align: right");
-                // recipeTitle.attr("class", "savedRecipeTitle");
-                // renderDiv.append(recipeTitle);
-    //SAVED COMMENTS          
-                commentDiv.attr("style", "display: inline-block;")
-                formLabel.attr("class", "formLabel")
-                formLabel.attr("style", "font-size: 24px;")
-                formLabel.text('Comments for "' + recipeObj.title +'"');
-                renderDiv.append(commentDiv);
-                commentDiv.append(formLabel);
-                formText.attr("id", "Comment" + recipeObj.rID)
-                commentDiv.append(formText);
+                }
+                
+                function constructImg() {
+                    anchor.attr({
+                        href: recipeObj.source, 
+                        target: "_blank"
+                    });
+                    renderDiv.append(anchor);
+                    recipeIMG.attr({
+                        id: "IMG" + recipeObj.rID,
+                        src: recipeObj.imgURL,
+                        class: "mouseOn linkUrl",
+                        style: "height: 200px; width: 200px; margin-left: auto; margin-right: auto; display: block; float: left; padding-right: 10px;"
+                    });
+                    anchor.append(recipeIMG);
+                };
+                constructImg();
+             
+                function constructCommentBox() {
+                    commentDiv.attr("style", "display: inline-block;")
+                    formLabel.attr({
+                        class: "formLabel",
+                        style: "font-size: 24px;"
+                    });
+                    formLabel.text('Comments for "' + recipeObj.title +'"');
+                    formText.attr("id", "Comment" + recipeObj.rID);
+                    renderDiv.append(commentDiv);
+                    commentDiv.append(formLabel);
+                    commentDiv.append(formText);
+                };
+                constructCommentBox();
 
-                ingBtn.attr("class", "btn btn-default ingredientBtn" )
-                ingBtn.text("Ingredients");
-                ingBtn.attr("data-toggle","popover");
-                ingBtn.attr("title","Ingredients");
-                ingBtn.attr("data-content", uList.html());
-                ingBtn.attr("style", "display: inline-block;");
-                commentDiv.append(ingBtn);
-                $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});ingBtn
+                function constructIngredientPopUp() {
+                    ingredientBtn.text("Ingredients");
+                    ingredientBtn.attr({
+                        class: "btn btn-default ingredientBtn",
+                        title: "Ingredients",
+                        style: "display: inline-block;",
+                        'data-toggle': "popover",
+                        'data-content': uList.html()
+                    });
+                    commentDiv.append(ingredientBtn);
+                    $('[data-toggle="popover"]').popover({ 
+                        html : true, 
+                        content : uList, 
+                        container : "body"
+                    });
+                };
+                constructIngredientPopUp();
 
+                function constructSaveBtn(){
+                    newButton.text("Save Comments");
+                    newButton.attr({
+                        id: "save" + recipeObj.rID,
+                        class: "btn btn-default saveBtn",
+                        style: "float: right;"
+                    });
+                    commentDiv.append(newButton);    
+                };
+                constructSaveBtn();
 
+                function constructTrashBtn(){
+                    trashSpan.attr({
+                        class: "glyphicon glyphicon-trash trashSpan2",
+                        style: "font-size: 42px; display: inline-block;",
+                        id: "trash" + recipeObj.rID
+                    });
+                    renderDiv.append(trashSpan);  
+                }
+                constructTrashBtn();
 
-                newButton.attr("id", "save" + recipeObj.rID);
-                newButton.text("Save Comment");
-                newButton.attr("class", "btn btn-default saveBtn")
-                newButton.attr("style", "float: right;")
-                commentDiv.append(newButton);
-
-                trashSpan.attr("class", "glyphicon glyphicon-trash trashSpan2");
-                trashSpan.attr("style", "font-size: 42px; display: inline-block;");
-                trashSpan.attr("id", "trash" + recipeObj.rID);
-                renderDiv.append(trashSpan);  
-
-                var commentKey = "save" + recipeObj.rID
+//If a saved comment exists in LS, set textarea text to that stored comment
                 if (localStorage.getItem(commentKey) != null){
                     $("#" + "Comment" + recipeObj.rID).val(localStorage.getItem(commentKey));
                 }
             })
         }
     } 
+
     if (searchedArr !== []){
-        var newButton = $("<button>");
-        newButton.attr("id", "clearButton");
-        newButton.text("Clear History");
-        newButton.attr("class", "btn btn-default")
-        newButton.attr("style", "margin-left: auto; margin-right: auto; display: block;");
-        $("#historyAppend").append(newButton);
-
-        for ( var i = 0 ; i < searchedArr.length; i++ ) {
-            var ID = searchedArr[i];
-            console.log("RID[i]",searchedArr[i]);
-            $.ajax({
-                url: 'https://cors-anywhere.herokuapp.com/' + getURL,
-                method: 'GET',
-                data:{
-                    key: APIkey,
-                    rId: ID
-                },
-            }).done(function (result){
-                recipeObj =  {
-                    imgURL: JSON.parse(result).recipe.image_url,
-                    title: JSON.parse(result).recipe.title,
-                    ingredients: JSON.parse(result).recipe.ingredients,
-                    rID: JSON.parse(result).recipe.recipe_id,
-                    source: JSON.parse(result).recipe.source_url
-                }
-  
-            function addHistoryDiv() {
-                var newDiv = $("<div>");
-                newDiv.attr("id", recipeObj.rID);
-                newDiv.attr("class", "well col-xs-3 col-md-1 historyDiv");
-                newDiv.attr("style", "position: relative; height: 90px; width: 90px;");
-                $("#historyAppend").append(newDiv);
-                return newDiv;
-            }
-            var historyRender = addHistoryDiv();
-            var anchor = $("<a>");
-            var recipeIMG = $("<img>");
-
-            anchor.attr("href", recipeObj.source);
-            anchor.attr("target", "_blank");
-            historyRender.append(anchor);
-            recipeIMG.attr("id", "IMG" + recipeObj.rID);
-            recipeIMG.attr("src", recipeObj.imgURL);
-            recipeIMG.attr("class", "historyItem");
-            recipeIMG.attr("style","height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;" );
-            anchor.append(recipeIMG);
-            })
+        function constructClearSearchBtn(){
+            var newButton = $("<button>");
+            newButton.text("Clear History");
+            newButton.attr({
+                id: "clearButton",
+                class: "btn btn-default",
+                style: "margin: 0 auto 10px auto; display: block;"
+            });
+            $("#historyAppend").append(newButton);
         }
+        constructClearSearchBtn();
+
+        function generateHistoryItems(){
+            for ( var i = 0 ; i < searchedArr.length; i++ ) {
+                var ID = searchedArr[i];
+                console.log("RID[i]",searchedArr[i]);
+                $.ajax({
+                    url: 'https://cors-anywhere.herokuapp.com/' + getURL,
+                    method: 'GET',
+                    data:{
+                        key: APIKey,
+                        rId: ID
+                    },
+                }).done(function (result){
+                    recipeObj =  {
+                        imgURL: JSON.parse(result).recipe.image_url,
+                        title: JSON.parse(result).recipe.title,
+                        ingredients: JSON.parse(result).recipe.ingredients,
+                        rID: JSON.parse(result).recipe.recipe_id,
+                        source: JSON.parse(result).recipe.source_url
+                    }
+
+                    var anchor = $("<a>");
+                    var historyRender = addHistoryDiv();
+                    var recipeIMG = $("<img>");
+
+//WTF NEWDIV ASK IN CLASS//
+
+                    function addHistoryDiv() {
+                        var newDiv = $("<div>");
+                        newDiv.attr({
+                            id: recipeObj.rID,
+                            class: "well col-xs-3 col-md-1 historyDiv",
+                            style: "position: relative; height: 90px; width: 90px;"
+                        });
+                    $("#historyAppend").append(newDiv);
+                    return newDiv;
+                    }
+
+                    function constructHistoryItem() {
+                        anchor.attr({
+                            href: recipeObj.source,
+                            target: "_blank"
+                        });
+                        recipeIMG.attr({
+                            id: "IMG" + recipeObj.rID,
+                            src: recipeObj.imgURL,
+                            class: "historyItem",
+                            style: "height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;"
+                        });
+                        historyRender.append(anchor);
+                        anchor.append(recipeIMG);
+                    };
+                    constructHistoryItem();
+                })
+            }
+        };
+        generateHistoryItems();
     }
-    
+
+    //Remove Saved recipeBox result
     $(document).on("click", ".trashSpan2", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
@@ -169,14 +217,13 @@ $(document).ready(function(){
         localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         $(this).parents().eq(0).remove();
         localStorage.removeItem(saveId, null);
-        console.log(saveId);    
     })
 
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");
         $("#historyAppend").remove();
     })
-
+//commit comment in textarea to LS
     $(document).on("click", ".saveBtn", function(){
         var saveComment = $(this).siblings(".commentSave").val();
         var saveId = $(this).attr("id");
