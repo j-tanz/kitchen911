@@ -1,17 +1,26 @@
-$(document).ready(function(){
+/**
+ * this function waits for the document to load before running.
+ * storedRecipes parses the data into local storage into an array.
+ * searchedArr also parses data into local storage into an array.
+ * getURL is storing a URL as a variable.
+ * recipeObj is the data being returned in array.
+ * ID is the recipe key that we need for the website to make searches.
+ * the API key is what we use to authenticate the ajax request.
+ */$(document).ready(function(){
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
     var searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
     var getURL = "http://food2fork.com/api/get";
     var recipeObj = [];
     var ID;
-<<<<<<< HEAD
     var APIkey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
 
-=======
-    var apiKey = "83e9f3d3227309240bf5d8a553b893c9"; //ffeb038edfff951ae133911feb4ba4ae
->>>>>>> e950b557422ed3723bf122550717e5de70d53f7e
     
     // console.log("idArray", storedRecipes);
+
+    /**
+     * an ajax call being made to food 2 fork. 
+     * returning with recipeObj the information that we display on our site.
+     */
 
     if (storedRecipes !== []){
         for ( var i = 0 ; i < storedRecipes.length; i++ ) {
@@ -21,11 +30,7 @@ $(document).ready(function(){
                 url: 'https://cors-anywhere.herokuapp.com/' + getURL,
                 method: 'GET',
                 data:{
-<<<<<<< HEAD
                     key: APIkey,
-=======
-                    key: apiKey,
->>>>>>> e950b557422ed3723bf122550717e5de70d53f7e
                     rId: ID
                 },
             }).done(function (result){
@@ -36,8 +41,10 @@ $(document).ready(function(){
                     rID: JSON.parse(result).recipe.recipe_id,
                     source: JSON.parse(result).recipe.source_url
                 }
-// console.log("where", result);
-            
+// console.log("where", result)
+/**
+ * creates a new div fpr you saved recipes to appear but also give uour the ability to remove that item.
+ */
             function addNewDiv() {
                 var newDiv = $("<div>");
                 newDiv.attr("id", recipeObj.rID);
@@ -97,7 +104,9 @@ $(document).ready(function(){
                     source: JSON.parse(result).recipe.source_url
                 }
                 // console.log("2", result);
-          
+/**
+ * addHistorDiv allows you to see the the search history from the recipes you have been looking up. 
+ */
             function addHistoryDiv() {
                 var newDiv = $("<div>");
                 newDiv.attr("id", recipeObj.rID);
@@ -124,7 +133,9 @@ $(document).ready(function(){
 
         }
     }
-    
+    /**
+     * listens to the whole document and allows user to remove a stored recipe from the page. 
+     */
     $(document).on("click", ".trashSpan", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
