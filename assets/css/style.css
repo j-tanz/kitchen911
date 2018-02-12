@@ -9,17 +9,35 @@ body{
     border-bottom: 3px solid rgb(177, 42, 42);
     margin-bottom: 0;
     color:white;
+    align-items: center;
+    
 }
 .jumbotron {
     text-align: center;
+    height: 150px;
     margin-bottom: 0;
-    height: 400px;
     background-image: url("http://www.fitgirlcode.com/wp-content/uploads/2015/01/462812_ovoshhi_stol_lozhki_derevyannye_griby_perec_kapust_1680x1050_www.GdeFon.ru_.jpg");
     background-position: center;
     color: rgb(221, 220, 220);
     text-shadow: rgb(46, 44, 44) 0.4em 0.4em 0.4em;
     padding-top: 120px;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    position: relative;
+    top: -40px;
+}
+
+h2 {
+    position: relative;
+    top: -60px;
+    font-size: 150%;
+    color: rgb(255, 238, 0);
 }
 
 span {
@@ -54,7 +72,7 @@ span {
 
 #favoritesBox{
     background: rgb(36, 35, 35);
-    padding:10px;
+    padding: 10px;
     border-style: hidden;
     border-radius: 8px 8px 8px 8px;
     border-width: thin rgb(3, 3, 3);
@@ -63,6 +81,8 @@ span {
     border-left-width:thin;
     border-right-width:thin;
     margin-bottom: 100px;
+    position: relative;
+    top: -25px;
 }
 
 #historyBox{
@@ -77,6 +97,15 @@ span {
     border-right-width:thin;
     margin-bottom: 100px;
 }
+
+#historyAppend {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: space-around;
+    
+}
+
 footer{
     background-color: rgb(36, 35, 35);
     padding:20px;
@@ -110,12 +139,47 @@ footer{
     /* float: right; */
 }
 
-.trashSpan2 {
-    font-size: 50px;
-    position: absolute;
-    top: 50px;
-    right : 13%;
+.savedImg {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 1px;
+    border: 1px solid #021a40;
+    background-color: rgb(155, 94, 2);
 }
+
+.recipeImgMain, .historyItem {
+    padding: 1px;
+    border: 1px solid #021a40;
+    background-color: rgb(155, 94, 2);
+}
+
+.trashButton, .saveBtn, .ingredientBtn  {
+    /* padding: 1px; */
+    border: 1px solid #021a40;
+}
+
+textarea.commentSave {
+    border: 1px solid #021a40;
+    margin-bottom: 10px;
+    color: rgb(17, 16, 17);
+    font-weight: bold;
+}
+
+.formLabel {
+    color: rgb(36, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+}
+
+#copyRight {
+    float: right;
+    position: relative;
+    top: 5px;
+
+}
+
+
 
 #firechat-wrapper {
     height: 475px;
@@ -190,19 +254,25 @@ p{
 }
 
 @media (min-width: 735px){
+    .jumbotron{
+        height: 400px;
+
+    }
     .formLabel{
         width: 75%;
     }
     .form-group {
         width: 70%;
     }  
+    .savedImg {
+        margin-left: auto; 
+        margin-right: 20px; 
+        display: block; 
+        float: left;
+    }
 }
 
 @media (min-width: 992px){
-    .trashSpan2 {
-        right: 25px;
-        top: 40px;
-    }
 
     .formLabel {
         width: 100%;

@@ -1,4 +1,4 @@
-const APIKey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+const APIKey =   "ffeb038edfff951ae133911feb4ba4ae"   /*   "83e9f3d3227309240bf5d8a553b893c9"   */
 
 $(document).ready(function(){
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
@@ -39,6 +39,7 @@ $(document).ready(function(){
                 var newDiv = $("<div>");
                 var recipeIMG = $("<img>");
                 var renderDiv = addNewDiv();
+                var trashBtn = $("<button>");
                 var trashSpan = $("<span>");
                 var uList = $("<ul>");
 
@@ -68,8 +69,8 @@ $(document).ready(function(){
                     recipeIMG.attr({
                         id: "IMG" + recipeObj.rID,
                         src: recipeObj.imgURL,
-                        class: "mouseOn linkUrl",
-                        style: "height: 200px; width: 200px; margin-left: auto; margin-right: auto; display: block; float: left; padding-right: 10px;"
+                        class: "mouseOn linkUrl savedImg",
+                        style: "height: 200px; width: 200px;"
                     });
                     anchor.append(recipeIMG);
                 };
@@ -119,12 +120,12 @@ $(document).ready(function(){
                 constructSaveBtn();
 
                 function constructTrashBtn(){
-                    trashSpan.attr({
-                        class: "glyphicon glyphicon-trash trashSpan2",
-                        style: "font-size: 42px; display: inline-block;",
-                        id: "trash" + recipeObj.rID
-                    });
-                    renderDiv.append(trashSpan);  
+                    trashBtn.attr({
+                        class: "btn btn-default trashButton glyphicon glyphicon-trash",
+                        id: "trash" + recipeObj.rID,
+                        style: "font-size: 42px; float: right; color: rgb(177, 42, 42);"
+                    })
+                    renderDiv.append(trashBtn);
                 }
                 constructTrashBtn();
 
@@ -136,7 +137,7 @@ $(document).ready(function(){
         }
     } 
 
-    if (searchedArr !== []){
+    if (searchedArr.length !== 0){
         function constructClearSearchBtn(){
             var newButton = $("<button>");
             newButton.text("Clear History");
@@ -145,8 +146,8 @@ $(document).ready(function(){
                 class: "btn btn-default",
                 style: "margin: 0 auto 10px auto; display: block;"
             });
-            $("#historyAppend").append(newButton);
-        }
+            $("#historyBox").append(newButton);
+        };
         constructClearSearchBtn();
 
         function generateHistoryItems(){
@@ -206,9 +207,11 @@ $(document).ready(function(){
         };
         generateHistoryItems();
     }
+// WHAT????
+    // console.log(searchedArr !== [], searchedArr);
 
     //Remove Saved recipeBox result
-    $(document).on("click", ".trashSpan2", function(){
+    $(document).on("click", ".trashButton", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
         var saveId = $(this).siblings().children(".saveBtn").attr("id");
@@ -222,6 +225,7 @@ $(document).ready(function(){
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");
         $("#historyAppend").remove();
+        $("#clearButton").parent().remove();
     })
 //commit comment in textarea to LS
     $(document).on("click", ".saveBtn", function(){

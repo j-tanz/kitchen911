@@ -1,4 +1,4 @@
-const APIKey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+const APIKey =   "ffeb038edfff951ae133911feb4ba4ae"  /* "83e9f3d3227309240bf5d8a553b893c9" */
 
 $(document).ready(function(){
     var recipeObj = {};
@@ -93,7 +93,7 @@ $(document).ready(function(){
                         insideDiv.append(trashSpan);
                     };
                     constructSaveNTrash();
-
+//image
                     function constructResultImg(){
                         anchor.attr({
                             href: recipeObj.source,
