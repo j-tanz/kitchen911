@@ -1,4 +1,4 @@
-const APIKey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+const APIKey =   "ffeb038edfff951ae133911feb4ba4ae"  /* "83e9f3d3227309240bf5d8a553b893c9" */
 
 $(document).ready(function(){
     var recipeObj = {};
@@ -7,6 +7,14 @@ $(document).ready(function(){
     var searchedArr = [];
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
  
+
+    $("#resultAppend:empty").parent().hide();
+    
+    // console.log(resultArr.length);
+
+/**
+ *  Fetches recipe search term from page and makes ajax request to food2fork.
+*/
     $("#searchBttn").on("click", function(event){
         event.preventDefault();
         var recipeSearch = $("#searchTerm").val().trim();
@@ -28,7 +36,10 @@ $(document).ready(function(){
             }    
             lookUpId();       
         });
-              
+
+/**
+ *   Makes an ajax call to food2fork and fetches recipeObj.
+ */  
         function lookUpId() {
             for(var i = 0; i < resultArr.length; i++){
                 $.ajax({
@@ -40,6 +51,7 @@ $(document).ready(function(){
                     }
 
                 }).done(function (result){
+                    $("#resultAppend").parent().show();
                     recipeObj = {
                         imgURL: JSON.parse(result).recipe.image_url,
                         title: JSON.parse(result).recipe.title,
@@ -47,6 +59,7 @@ $(document).ready(function(){
                         rID: JSON.parse(result).recipe.recipe_id,
                         source: JSON.parse(result).recipe.source_url
                     }
+               
 
                     var anchor = $("<a>");
                     var buttonDiv = $("<div>");
@@ -57,43 +70,49 @@ $(document).ready(function(){
                     var recipeIMG = $("<img>");
                     var recipeTitle = $("<h4>");
                     var renderDiv = addNewDiv();
-                    var starSpan = $("<span>");
-                    var trashSpan = $("<span>");
+                    var starBtn = $("<button>");
+                    var trashBtn = $("<button>");
                     var uList = $("<ul>");
 
-    // Function to create a new <div/> & assignId = "div"rId#
+/**
+ * Function to create a new <div/> & assignId = "div"rId#
+ * @return {object} -  a div containing recipeObj.rID
+ */  
+
                     function addNewDiv() {
                         var newDiv = $("<div>");
-                        newDiv.attr("id", recipeObj.rID);
-                        newDiv.attr("class", "well col-xs-12 col-md-6 result");
+                        newDiv.attr({
+                            id: recipeObj.rID,
+                            class: "well col-xs-12 col-md-6 result",
+                            style: "position: relative"
+                        });
                         $("#resultAppend").append(newDiv);
                         return newDiv;
                     }    
-    // Append Ajax results to DOM
-    //convert ingredients array to list
+    
                     for ( var a = 0; a < recipeObj.ingredients.length; a++){
                         var listItem = $("<li></li>");
                         var singleIngredient = recipeObj.ingredients[a];
                         listItem.text(singleIngredient); 
                         uList.append(listItem);
                     }
-    //insidediv 
-                    (function(){
-                        insideDiv.attr("style", "position: absolute; margin: auto; width: 100%;")
-                        renderDiv.append(insideDiv);
-                    })();
-    //Star & trash     
-                    function constructSaveNTrash(){
-                        starSpan.attr("class", "glyphicon glyphicon-star-empty starSpan");
-                        trashSpan.attr({
-                            class: "glyphicon glyphicon-trash trashSpan media-right",
-                            id: "trash" + recipeObj.rID
+    
+/**
+ * Displays star(favorite) button.
+ */     
+                    function constructStarBtn(){
+                        starBtn.attr({
+                            class: "btn btn-default glyphicon glyphicon-star-empty starBtn",
+                            style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
+                            id: "star" + recipeObj.rID
                         });
-                        insideDiv.append(starSpan);
-                        insideDiv.append(trashSpan);
+                        renderDiv.append(starBtn);
                     };
-                    constructSaveNTrash();
+                    constructStarBtn();
 
+/**
+ * Displays image from searched recipe. 
+ */
                     function constructResultImg(){
                         anchor.attr({
                             href: recipeObj.source,
@@ -102,20 +121,40 @@ $(document).ready(function(){
                         recipeIMG.attr({
                             id: "IMG" + recipeObj.rID,
                             src: recipeObj.imgURL,
-                            class: "mouseOn linkUrl recipeImgMain"
+                            class: "mouseOn linkUrl recipeImgMain",
+                            alt: "Image " + recipeObj.rID
                         });
                         renderDiv.append(anchor);
                         anchor.append(recipeIMG);
                     };
                     constructResultImg();
-    // Ingredients Button
+
+/**
+ * Displays trash button.
+ */
+                    function constructTrashBtn(){
+                        trashBtn.attr({
+                            class: "btn btn-default glyphicon glyphicon-trash trashBtnSearch",
+                            style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
+                            id: "trash" + recipeObj.rID
+                        });
+                        renderDiv.append(trashBtn);
+                    }
+                    constructTrashBtn();
+                 
+
+    
+/**
+ *  Creates an ingredients button that displays "Ingredients" from the recipeObj.
+ */  
                     function constructIngrBtn(){
                         newButton.text("Ingredients");
                         newButton.attr({
                             id: "button" + recipeObj.rID,
-                            class: "btn btn-default",
+                            class: "btn btn-default ingredientBtn",
                             style: "margin-left: auto; margin-right: auto; display: block;",
                             title: "Ingredients",
+                            'data-placement':"auto",
                             'data-toggle': "popover",
                             'data-content': uList.html()
                         });
@@ -123,7 +162,9 @@ $(document).ready(function(){
                         $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});      
                     }
                     constructIngrBtn();
-
+/**
+ *   Displays title of searched recipe.
+ */  
                     function appendTitle(){
                         recipeTitle.text(recipeObj.title);
                         recipeTitle.attr("class", "recipeDesc");
@@ -131,7 +172,7 @@ $(document).ready(function(){
                     };
                     appendTitle();
 
-    //history ARR 
+     
                     searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
 
                     if(searchedArr.indexOf(recipeObj.rID) === -1){
@@ -142,25 +183,33 @@ $(document).ready(function(){
             }    
         }
     });
-
-    //enter key submit search
+/**
+ *  Listens for enter key and searches.
+ */  
+    
     $("#searchTerm").on("keyup", function(event){
         event.preventDefault();
         if (event.keyCode === 13) {
             $("#searchBttn").click();
         }
     })
-    //Save result
-    $(document).on("click", ".starSpan", function(){
-        var storeThis = $(this).parents().eq(1).attr("id");
+/**
+ *  Gets information from the page and stores in array in local storage. 
+ */  
+
+    $(document).on("click", ".starBtn", function(){
+        var storeThis = $(this).parents().eq(0).attr("id");
         if(storedRecipes.indexOf(storeThis) === -1){
             storedRecipes.push(storeThis);
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         }
     })
-    //Trash Result
-    $(document).on("click", ".trashSpan", function(){
-        $(this).parents().eq(1).remove();
+/**
+ *  Trashes a result.
+ */  
+    $(document).on("click", ".trashBtnSearch", function(){
+        $(this).parents().eq(0).remove();
         $(".popover").popover("hide");
+        $("#resultAppend:empty").parent().hide();
     }) 
 })

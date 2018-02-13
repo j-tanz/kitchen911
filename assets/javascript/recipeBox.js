@@ -1,4 +1,4 @@
-const APIKey = /*"ffeb038edfff951ae133911feb4ba4ae"*/ "83e9f3d3227309240bf5d8a553b893c9"
+const APIKey =   "ffeb038edfff951ae133911feb4ba4ae"   /*   "83e9f3d3227309240bf5d8a553b893c9"   */
 
 $(document).ready(function(){
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
@@ -6,6 +6,9 @@ $(document).ready(function(){
     var getURL = "http://food2fork.com/api/get";
     var recipeObj = [];
     var ID;
+
+    $("#resultAppend:empty").parent().hide();
+    $("#historyAppend:empty").parent().hide();
 
     if (storedRecipes !== []){
         for ( var i = 0 ; i < storedRecipes.length; i++ ) {
@@ -19,6 +22,7 @@ $(document).ready(function(){
                 },
 
             }).done(function (result){
+                $("#resultAppend").parent().show();
                 recipeObj =  {
                     imgURL: JSON.parse(result).recipe.image_url,
                     title: JSON.parse(result).recipe.title,
@@ -31,7 +35,7 @@ $(document).ready(function(){
                 var commentDiv = $("<div class='form-group'>");
                 var commentKey = "save" + recipeObj.rID;
                 var formLabel = $("<label for='comment'></label>");
-                var formText = $("<textarea class='form-control commentSave' placeholder='My Comments:' rows='6'></textarea>");
+                var formText = $("<textarea></textarea>");
                 var ingredientBtn = $("<button>");
                 var ingredientArr = [];
                 var ingredientList = $("<ul>");
@@ -39,8 +43,13 @@ $(document).ready(function(){
                 var newDiv = $("<div>");
                 var recipeIMG = $("<img>");
                 var renderDiv = addNewDiv();
-                var trashSpan = $("<span>");
+                var trashBtn = $("<button>");
                 var uList = $("<ul>");
+
+/**
+ *   Creates a new div that is filled with the search result.
+ *   @return {object} - div container for recipeObj.
+ */                  
 
                 function addNewDiv() {
                     newDiv.attr({
@@ -58,7 +67,9 @@ $(document).ready(function(){
                     listItem.text(singleIngredient); 
                     uList.append(listItem);
                 }
-                
+/**
+ *   Displays picture of recipe and adds a link to food2fork. 
+ */  
                 function constructImg() {
                     anchor.attr({
                         href: recipeObj.source, 
@@ -68,13 +79,16 @@ $(document).ready(function(){
                     recipeIMG.attr({
                         id: "IMG" + recipeObj.rID,
                         src: recipeObj.imgURL,
-                        class: "mouseOn linkUrl",
-                        style: "height: 200px; width: 200px; margin-left: auto; margin-right: auto; display: block; float: left; padding-right: 10px;"
+                        class: "mouseOn linkUrl savedImg",
+                        style: "height: 200px; width: 200px;",
+                        alt: "Image " + recipeObj.rID
                     });
                     anchor.append(recipeIMG);
                 };
                 constructImg();
-             
+/**
+ *  Provides a comment box for users to write text.
+ */  
                 function constructCommentBox() {
                     commentDiv.attr("style", "display: inline-block;")
                     formLabel.attr({
@@ -82,19 +96,26 @@ $(document).ready(function(){
                         style: "font-size: 24px;"
                     });
                     formLabel.text('Comments for "' + recipeObj.title +'"');
-                    formText.attr("id", "Comment" + recipeObj.rID);
+                    formText.attr({
+                        id: "Comment" + recipeObj.rID,
+                        class: "form-control commentSave", 
+                        placeholder: "My Comments:", 
+                        rows: '6'
+                    });
                     renderDiv.append(commentDiv);
                     commentDiv.append(formLabel);
                     commentDiv.append(formText);
                 };
                 constructCommentBox();
-
+/**
+ *  Creates a button that lists recipe ingredients. 
+ */  
                 function constructIngredientPopUp() {
                     ingredientBtn.text("Ingredients");
                     ingredientBtn.attr({
                         class: "btn btn-default ingredientBtn",
                         title: "Ingredients",
-                        style: "display: inline-block;",
+                        style: "display: inline-block; width: 129.5px",
                         'data-toggle': "popover",
                         'data-content': uList.html()
                     });
@@ -106,7 +127,9 @@ $(document).ready(function(){
                     });
                 };
                 constructIngredientPopUp();
-
+/**
+ *  Saves comments to a recipe.
+ */                  
                 function constructSaveBtn(){
                     newButton.text("Save Comments");
                     newButton.attr({
@@ -117,26 +140,30 @@ $(document).ready(function(){
                     commentDiv.append(newButton);    
                 };
                 constructSaveBtn();
-
+/**
+ *  Removes the recipe(s) that are results from search.
+ */  
                 function constructTrashBtn(){
-                    trashSpan.attr({
-                        class: "glyphicon glyphicon-trash trashSpan2",
-                        style: "font-size: 42px; display: inline-block;",
+                    trashBtn.attr({
+                        class: "btn btn-default trashButtonBox glyphicon glyphicon-trash",
+                        style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                         id: "trash" + recipeObj.rID
-                    });
-                    renderDiv.append(trashSpan);  
+                    })
+                    renderDiv.append(trashBtn);
                 }
                 constructTrashBtn();
 
-//If a saved comment exists in LS, set textarea text to that stored comment
+
                 if (localStorage.getItem(commentKey) != null){
                     $("#" + "Comment" + recipeObj.rID).val(localStorage.getItem(commentKey));
                 }
             })
         }
     } 
-
-    if (searchedArr !== []){
+/**
+ *   Clears saved searched results
+ */  
+    if (searchedArr.length !== 0){
         function constructClearSearchBtn(){
             var newButton = $("<button>");
             newButton.text("Clear History");
@@ -145,10 +172,12 @@ $(document).ready(function(){
                 class: "btn btn-default",
                 style: "margin: 0 auto 10px auto; display: block;"
             });
-            $("#historyAppend").append(newButton);
-        }
+            $("#historyBox").append(newButton);
+        };
         constructClearSearchBtn();
-
+/**
+ *   Makes an ajax call to food2fork and displays items searched
+ */  
         function generateHistoryItems(){
             for ( var i = 0 ; i < searchedArr.length; i++ ) {
                 var ID = searchedArr[i];
@@ -161,6 +190,7 @@ $(document).ready(function(){
                         rId: ID
                     },
                 }).done(function (result){
+                    $("#historyAppend").parent().show();
                     recipeObj =  {
                         imgURL: JSON.parse(result).recipe.image_url,
                         title: JSON.parse(result).recipe.title,
@@ -172,9 +202,10 @@ $(document).ready(function(){
                     var anchor = $("<a>");
                     var historyRender = addHistoryDiv();
                     var recipeIMG = $("<img>");
-
-//WTF NEWDIV ASK IN CLASS//
-
+/**
+ *   Creates a div for displaying past search result history.
+ *   @return {object} div container for recipeObj
+ */  
                     function addHistoryDiv() {
                         var newDiv = $("<div>");
                         newDiv.attr({
@@ -185,7 +216,9 @@ $(document).ready(function(){
                     $("#historyAppend").append(newDiv);
                     return newDiv;
                     }
-
+/**
+ *   Displays an image(s) for each recipe searched.
+ */  
                     function constructHistoryItem() {
                         anchor.attr({
                             href: recipeObj.source,
@@ -195,7 +228,8 @@ $(document).ready(function(){
                             id: "IMG" + recipeObj.rID,
                             src: recipeObj.imgURL,
                             class: "historyItem",
-                            style: "height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;"
+                            style: "height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;",
+                            alt: "Image " + recipeObj.rID
                         });
                         historyRender.append(anchor);
                         anchor.append(recipeIMG);
@@ -207,8 +241,10 @@ $(document).ready(function(){
         generateHistoryItems();
     }
 
-    //Remove Saved recipeBox result
-    $(document).on("click", ".trashSpan2", function(){
+/**
+ *   Removes favorited recipes from page.
+ */
+    $(document).on("click", ".trashButtonBox", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
         var saveId = $(this).siblings().children(".saveBtn").attr("id");
@@ -217,13 +253,21 @@ $(document).ready(function(){
         localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         $(this).parents().eq(0).remove();
         localStorage.removeItem(saveId, null);
+        $("#resultAppend:empty").parent().hide();
     })
-
+/**
+ *   Removes saved search history.
+ */  
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");
         $("#historyAppend").remove();
+        $("#clearButton").parent().remove();
+        $("#historyAppend:empty").parent().hide();
     })
-//commit comment in textarea to LS
+
+/**
+ *   Saves comments in text area to local storage.
+ */  
     $(document).on("click", ".saveBtn", function(){
         var saveComment = $(this).siblings(".commentSave").val();
         var saveId = $(this).attr("id");
