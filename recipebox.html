@@ -26,25 +26,31 @@
     <nav class="navbar navbar-inverse navbar-custom">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobileNav" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#">K<span>911</span></a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href=index.html>Home</a></li>
-                <li class="active"><a href=recipebox.html>Recipe Box</a></li>
-            </ul>
+            <div class= "collapse navbar-collapse" id="mobileNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href=index.html>Home</a></li>
+                    <li class="active"><a href=recipebox.html>Recipe Box</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="jumbotron">
         <h1>Recipe<span>Box</span></h1> 
-        <p>Find your saved recipes here</p> 
+        <h2>Find your saved recipes here</h2> 
     </div>
     <br>
     <div class = "container">
         <div class="row"> 
             <div class="col-xs-12" id="favoritesBox">
-                <div id=resultAppend> 
-                    
-                </div>
+                <div id=resultAppend></div>
             </div>
         </div>
     </div>
@@ -52,9 +58,7 @@
     <div class = "container">
             <div class="row">
                 <div class="col-xs-12" id="historyBox">
-                    <div id=historyAppend> 
-                        
-                    </div>
+                    <div id=historyAppend></div>
                 </div>
             </div>
     </div>
@@ -68,7 +72,7 @@
                     <div id="firechat-wrapper"></div>
                 </ul>
         </div>
-        <p>Copyright @ Kitchen911 2018</p> 
+        <p id="copyRight">© 2018 Kitchen911</p> 
     </footer>
     <!-- CODE CREDIT TO MIT -->
     <script type="text/javascript">
