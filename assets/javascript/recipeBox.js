@@ -46,6 +46,11 @@ $(document).ready(function(){
                 var trashBtn = $("<button>");
                 var uList = $("<ul>");
 
+/**
+ *   Creates a new div that is filled with the search result.
+ *   @return {object} - div container for recipeObj.
+ */                  
+
                 function addNewDiv() {
                     newDiv.attr({
                         id: recipeObj.rID,
@@ -62,7 +67,9 @@ $(document).ready(function(){
                     listItem.text(singleIngredient); 
                     uList.append(listItem);
                 }
-                
+/**
+ *   Displays picture of recipe and adds a link to food2fork. 
+ */  
                 function constructImg() {
                     anchor.attr({
                         href: recipeObj.source, 
@@ -79,7 +86,9 @@ $(document).ready(function(){
                     anchor.append(recipeIMG);
                 };
                 constructImg();
-             
+/**
+ *  Provides a comment box for users to write text.
+ */  
                 function constructCommentBox() {
                     commentDiv.attr("style", "display: inline-block;")
                     formLabel.attr({
@@ -98,7 +107,9 @@ $(document).ready(function(){
                     commentDiv.append(formText);
                 };
                 constructCommentBox();
-
+/**
+ *  Creates a button that lists recipe ingredients. 
+ */  
                 function constructIngredientPopUp() {
                     ingredientBtn.text("Ingredients");
                     ingredientBtn.attr({
@@ -116,7 +127,9 @@ $(document).ready(function(){
                     });
                 };
                 constructIngredientPopUp();
-
+/**
+ *  Saves comments to a recipe.
+ */                  
                 function constructSaveBtn(){
                     newButton.text("Save Comments");
                     newButton.attr({
@@ -127,7 +140,9 @@ $(document).ready(function(){
                     commentDiv.append(newButton);    
                 };
                 constructSaveBtn();
-
+/**
+ *  Removes the recipe(s) that are results from search.
+ */  
                 function constructTrashBtn(){
                     trashBtn.attr({
                         class: "btn btn-default trashButtonBox glyphicon glyphicon-trash",
@@ -138,14 +153,16 @@ $(document).ready(function(){
                 }
                 constructTrashBtn();
 
-//If a saved comment exists in LS, set textarea text to that stored comment
+
                 if (localStorage.getItem(commentKey) != null){
                     $("#" + "Comment" + recipeObj.rID).val(localStorage.getItem(commentKey));
                 }
             })
         }
     } 
-
+/**
+ *   Clears saved searched results
+ */  
     if (searchedArr.length !== 0){
         function constructClearSearchBtn(){
             var newButton = $("<button>");
@@ -158,7 +175,9 @@ $(document).ready(function(){
             $("#historyBox").append(newButton);
         };
         constructClearSearchBtn();
-
+/**
+ *   Makes an ajax call to food2fork and displays items searched
+ */  
         function generateHistoryItems(){
             for ( var i = 0 ; i < searchedArr.length; i++ ) {
                 var ID = searchedArr[i];
@@ -183,9 +202,10 @@ $(document).ready(function(){
                     var anchor = $("<a>");
                     var historyRender = addHistoryDiv();
                     var recipeIMG = $("<img>");
-
-//WTF NEWDIV ASK IN CLASS//
-
+/**
+ *   Creates a div for displaying past search result history.
+ *   @return {object} div container for recipeObj
+ */  
                     function addHistoryDiv() {
                         var newDiv = $("<div>");
                         newDiv.attr({
@@ -196,7 +216,9 @@ $(document).ready(function(){
                     $("#historyAppend").append(newDiv);
                     return newDiv;
                     }
-
+/**
+ *   Displays an image(s) for each recipe searched.
+ */  
                     function constructHistoryItem() {
                         anchor.attr({
                             href: recipeObj.source,
@@ -219,7 +241,9 @@ $(document).ready(function(){
         generateHistoryItems();
     }
 
-    //Remove Saved recipeBox result
+/**
+ *   Removes favorited recipes from page.
+ */
     $(document).on("click", ".trashButtonBox", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
@@ -231,14 +255,19 @@ $(document).ready(function(){
         localStorage.removeItem(saveId, null);
         $("#resultAppend:empty").parent().hide();
     })
-
+/**
+ *   Removes saved search history.
+ */  
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");
         $("#historyAppend").remove();
         $("#clearButton").parent().remove();
         $("#historyAppend:empty").parent().hide();
     })
-//commit comment in textarea to LS
+
+/**
+ *   Saves comments in text area to local storage.
+ */  
     $(document).on("click", ".saveBtn", function(){
         var saveComment = $(this).siblings(".commentSave").val();
         var saveId = $(this).attr("id");

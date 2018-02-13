@@ -12,6 +12,9 @@ $(document).ready(function(){
     
     // console.log(resultArr.length);
 
+/**
+ *  Fetches recipe search term from page and makes ajax request to food2fork.
+*/
     $("#searchBttn").on("click", function(event){
         event.preventDefault();
         var recipeSearch = $("#searchTerm").val().trim();
@@ -33,7 +36,10 @@ $(document).ready(function(){
             }    
             lookUpId();       
         });
-              
+
+/**
+ *   Makes an ajax call to food2fork and fetches recipeObj.
+ */  
         function lookUpId() {
             for(var i = 0; i < resultArr.length; i++){
                 $.ajax({
@@ -68,7 +74,11 @@ $(document).ready(function(){
                     var trashBtn = $("<button>");
                     var uList = $("<ul>");
 
-    // Function to create a new <div/> & assignId = "div"rId#
+/**
+ * Function to create a new <div/> & assignId = "div"rId#
+ * @return {object} -  a div containing recipeObj.rID
+ */  
+
                     function addNewDiv() {
                         var newDiv = $("<div>");
                         newDiv.attr({
@@ -79,20 +89,17 @@ $(document).ready(function(){
                         $("#resultAppend").append(newDiv);
                         return newDiv;
                     }    
-    // Append Ajax results to DOM
-    //convert ingredients array to list
+    
                     for ( var a = 0; a < recipeObj.ingredients.length; a++){
                         var listItem = $("<li></li>");
                         var singleIngredient = recipeObj.ingredients[a];
                         listItem.text(singleIngredient); 
                         uList.append(listItem);
                     }
-    //insidediv 
-                    // (function(){
-                    //     insideDiv.attr("style", "position: absolute; margin: auto; width: 100%;")
-                    //     renderDiv.append(insideDiv);
-                    // })();
-    //Star    
+    
+/**
+ * Displays star(favorite) button.
+ */     
                     function constructStarBtn(){
                         starBtn.attr({
                             class: "btn btn-default glyphicon glyphicon-star-empty starBtn",
@@ -103,7 +110,9 @@ $(document).ready(function(){
                     };
                     constructStarBtn();
 
-//image
+/**
+ * Displays image from searched recipe. 
+ */
                     function constructResultImg(){
                         anchor.attr({
                             href: recipeObj.source,
@@ -120,7 +129,9 @@ $(document).ready(function(){
                     };
                     constructResultImg();
 
-//Trash
+/**
+ * Displays trash button.
+ */
                     function constructTrashBtn(){
                         trashBtn.attr({
                             class: "btn btn-default glyphicon glyphicon-trash trashBtnSearch",
@@ -132,7 +143,10 @@ $(document).ready(function(){
                     constructTrashBtn();
                  
 
-    // Ingredients Button
+    
+/**
+ *  Creates an ingredients button that displays "Ingredients" from the recipeObj.
+ */  
                     function constructIngrBtn(){
                         newButton.text("Ingredients");
                         newButton.attr({
@@ -148,7 +162,9 @@ $(document).ready(function(){
                         $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});      
                     }
                     constructIngrBtn();
-
+/**
+ *   Displays title of searched recipe.
+ */  
                     function appendTitle(){
                         recipeTitle.text(recipeObj.title);
                         recipeTitle.attr("class", "recipeDesc");
@@ -156,7 +172,7 @@ $(document).ready(function(){
                     };
                     appendTitle();
 
-    //history ARR 
+     
                     searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
 
                     if(searchedArr.indexOf(recipeObj.rID) === -1){
@@ -167,15 +183,20 @@ $(document).ready(function(){
             }    
         }
     });
-
-    //enter key submit search
+/**
+ *  Listens for enter key and searches.
+ */  
+    
     $("#searchTerm").on("keyup", function(event){
         event.preventDefault();
         if (event.keyCode === 13) {
             $("#searchBttn").click();
         }
     })
-    //Save result
+/**
+ *  Gets information from the page and stores in array in local storage. 
+ */  
+
     $(document).on("click", ".starBtn", function(){
         var storeThis = $(this).parents().eq(0).attr("id");
         if(storedRecipes.indexOf(storeThis) === -1){
@@ -183,7 +204,9 @@ $(document).ready(function(){
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         }
     })
-    //Trash Result
+/**
+ *  Trashes a result.
+ */  
     $(document).on("click", ".trashBtnSearch", function(){
         $(this).parents().eq(0).remove();
         $(".popover").popover("hide");
