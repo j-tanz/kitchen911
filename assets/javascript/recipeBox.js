@@ -131,6 +131,7 @@ $(document).ready(function(){
                 function constructTrashBtn(){
                     trashBtn.attr({
                         class: "btn btn-default trashButtonBox glyphicon glyphicon-trash",
+                        style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                         id: "trash" + recipeObj.rID
                     })
                     renderDiv.append(trashBtn);

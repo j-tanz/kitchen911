@@ -96,6 +96,7 @@ $(document).ready(function(){
                     function constructStarBtn(){
                         starBtn.attr({
                             class: "btn btn-default glyphicon glyphicon-star-empty starBtn",
+                            style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                             id: "star" + recipeObj.rID
                         });
                         renderDiv.append(starBtn);
@@ -123,6 +124,7 @@ $(document).ready(function(){
                     function constructTrashBtn(){
                         trashBtn.attr({
                             class: "btn btn-default glyphicon glyphicon-trash trashBtnSearch",
+                            style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                             id: "trash" + recipeObj.rID
                         });
                         renderDiv.append(trashBtn);
