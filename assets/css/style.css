@@ -9,9 +9,17 @@ body{
     border-bottom: 3px solid rgb(177, 42, 42);
     margin-bottom: 0;
     color:white;
-    align-items: center;
-    
+    align-items: center;  
 }
+
+/* .navbar-header {
+    float:left;
+}
+
+.nav{
+    float: right;
+} */
+
 .jumbotron {
     text-align: center;
     height: 150px;
@@ -42,12 +50,6 @@ h2 {
 
 span {
     color:rgb(177, 42, 42);
-}
-.trashSpan{
-    color:black;
-}
-.starSpan{
-    color: black;
 }
 
 #formContainer {
@@ -82,7 +84,7 @@ span {
     border-right-width:thin;
     margin-bottom: 100px;
     position: relative;
-    top: -25px;
+    top: -20px;
 }
 
 #historyBox{
@@ -123,20 +125,29 @@ footer{
     font-size: 16px;
 }
 
-.starSpan {
+.starBtn {
+    height: 65px;
+    width: 65px;
+    color: rgb(177, 42, 42);
+    border: 1px solid #021a40;
     font-size: 48px;
     position: absolute;
+    left: 1.5%;
+    top: 6%;
     float: left;
-    left: 0;
+
 }
 
-.trashSpan {
-    font-size: 40px;
+.trashBtnSearch {
+    height: 65px;
+    width: 65px;
+    color: rgb(177, 42, 42);
+    border: 1px solid #021a40;
+    font-size: 48px;
     position: absolute;
-    margin-left: auto;
-    right: 35px;
-    top: 5px;
-    /* float: right; */
+    right: 1.5%;
+    top: 6%;
+    float: right;
 }
 
 .savedImg {
@@ -154,10 +165,21 @@ footer{
     background-color: rgb(155, 94, 2);
 }
 
-.trashButton, .saveBtn, .ingredientBtn  {
+.saveBtn, .ingredientBtn  {
     /* padding: 1px; */
     border: 1px solid #021a40;
 }
+
+.trashButtonBox{
+    border: 1px solid #021a40;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-size: 42px;
+    color: rgb(177, 42, 42);
+    width: 35%;
+}
+
 
 textarea.commentSave {
     border: 1px solid #021a40;
@@ -177,6 +199,10 @@ textarea.commentSave {
     position: relative;
     top: 5px;
 
+}
+
+.hide {
+    visibility: hidden;
 }
 
 
@@ -241,16 +267,11 @@ p{
     .recipeDesc {
         font-size: 24px;
     }
-    .starSpan {
-        left: 10;
-        font-size: 60px;
+
+    .trashButtonBox {
+        width: 78px;
     }
-    
-    .trashSpan {
-        right: 45px;
-        font-size: 50px;
-    }
-    
+
 }
 
 @media (min-width: 735px){

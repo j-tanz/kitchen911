@@ -7,6 +7,11 @@ $(document).ready(function(){
     var searchedArr = [];
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
  
+
+    $("#resultAppend:empty").parent().hide();
+    
+    // console.log(resultArr.length);
+
     $("#searchBttn").on("click", function(event){
         event.preventDefault();
         var recipeSearch = $("#searchTerm").val().trim();
@@ -40,6 +45,7 @@ $(document).ready(function(){
                     }
 
                 }).done(function (result){
+                    $("#resultAppend").parent().show();
                     recipeObj = {
                         imgURL: JSON.parse(result).recipe.image_url,
                         title: JSON.parse(result).recipe.title,
@@ -47,6 +53,7 @@ $(document).ready(function(){
                         rID: JSON.parse(result).recipe.recipe_id,
                         source: JSON.parse(result).recipe.source_url
                     }
+               
 
                     var anchor = $("<a>");
                     var buttonDiv = $("<div>");
@@ -57,15 +64,18 @@ $(document).ready(function(){
                     var recipeIMG = $("<img>");
                     var recipeTitle = $("<h4>");
                     var renderDiv = addNewDiv();
-                    var starSpan = $("<span>");
-                    var trashSpan = $("<span>");
+                    var starBtn = $("<button>");
+                    var trashBtn = $("<button>");
                     var uList = $("<ul>");
 
     // Function to create a new <div/> & assignId = "div"rId#
                     function addNewDiv() {
                         var newDiv = $("<div>");
-                        newDiv.attr("id", recipeObj.rID);
-                        newDiv.attr("class", "well col-xs-12 col-md-6 result");
+                        newDiv.attr({
+                            id: recipeObj.rID,
+                            class: "well col-xs-12 col-md-6 result",
+                            style: "position: relative"
+                        });
                         $("#resultAppend").append(newDiv);
                         return newDiv;
                     }    
@@ -78,21 +88,20 @@ $(document).ready(function(){
                         uList.append(listItem);
                     }
     //insidediv 
-                    (function(){
-                        insideDiv.attr("style", "position: absolute; margin: auto; width: 100%;")
-                        renderDiv.append(insideDiv);
-                    })();
-    //Star & trash     
-                    function constructSaveNTrash(){
-                        starSpan.attr("class", "glyphicon glyphicon-star-empty starSpan");
-                        trashSpan.attr({
-                            class: "glyphicon glyphicon-trash trashSpan media-right",
-                            id: "trash" + recipeObj.rID
+                    // (function(){
+                    //     insideDiv.attr("style", "position: absolute; margin: auto; width: 100%;")
+                    //     renderDiv.append(insideDiv);
+                    // })();
+    //Star    
+                    function constructStarBtn(){
+                        starBtn.attr({
+                            class: "btn btn-default glyphicon glyphicon-star-empty starBtn",
+                            id: "star" + recipeObj.rID
                         });
-                        insideDiv.append(starSpan);
-                        insideDiv.append(trashSpan);
+                        renderDiv.append(starBtn);
                     };
-                    constructSaveNTrash();
+                    constructStarBtn();
+
 //image
                     function constructResultImg(){
                         anchor.attr({
@@ -102,20 +111,34 @@ $(document).ready(function(){
                         recipeIMG.attr({
                             id: "IMG" + recipeObj.rID,
                             src: recipeObj.imgURL,
-                            class: "mouseOn linkUrl recipeImgMain"
+                            class: "mouseOn linkUrl recipeImgMain",
+                            alt: "Image " + recipeObj.rID
                         });
                         renderDiv.append(anchor);
                         anchor.append(recipeIMG);
                     };
                     constructResultImg();
+
+//Trash
+                    function constructTrashBtn(){
+                        trashBtn.attr({
+                            class: "btn btn-default glyphicon glyphicon-trash trashBtnSearch",
+                            id: "trash" + recipeObj.rID
+                        });
+                        renderDiv.append(trashBtn);
+                    }
+                    constructTrashBtn();
+                 
+
     // Ingredients Button
                     function constructIngrBtn(){
                         newButton.text("Ingredients");
                         newButton.attr({
                             id: "button" + recipeObj.rID,
-                            class: "btn btn-default",
+                            class: "btn btn-default ingredientBtn",
                             style: "margin-left: auto; margin-right: auto; display: block;",
                             title: "Ingredients",
+                            'data-placement':"auto",
                             'data-toggle': "popover",
                             'data-content': uList.html()
                         });
@@ -151,16 +174,17 @@ $(document).ready(function(){
         }
     })
     //Save result
-    $(document).on("click", ".starSpan", function(){
-        var storeThis = $(this).parents().eq(1).attr("id");
+    $(document).on("click", ".starBtn", function(){
+        var storeThis = $(this).parents().eq(0).attr("id");
         if(storedRecipes.indexOf(storeThis) === -1){
             storedRecipes.push(storeThis);
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         }
     })
     //Trash Result
-    $(document).on("click", ".trashSpan", function(){
-        $(this).parents().eq(1).remove();
+    $(document).on("click", ".trashBtnSearch", function(){
+        $(this).parents().eq(0).remove();
         $(".popover").popover("hide");
+        $("#resultAppend:empty").parent().hide();
     }) 
 })

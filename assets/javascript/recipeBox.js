@@ -7,6 +7,9 @@ $(document).ready(function(){
     var recipeObj = [];
     var ID;
 
+    $("#resultAppend:empty").parent().hide();
+    $("#historyAppend:empty").parent().hide();
+
     if (storedRecipes !== []){
         for ( var i = 0 ; i < storedRecipes.length; i++ ) {
             var ID = storedRecipes[i]
@@ -19,6 +22,7 @@ $(document).ready(function(){
                 },
 
             }).done(function (result){
+                $("#resultAppend").parent().show();
                 recipeObj =  {
                     imgURL: JSON.parse(result).recipe.image_url,
                     title: JSON.parse(result).recipe.title,
@@ -31,7 +35,7 @@ $(document).ready(function(){
                 var commentDiv = $("<div class='form-group'>");
                 var commentKey = "save" + recipeObj.rID;
                 var formLabel = $("<label for='comment'></label>");
-                var formText = $("<textarea class='form-control commentSave' placeholder='My Comments:' rows='6'></textarea>");
+                var formText = $("<textarea></textarea>");
                 var ingredientBtn = $("<button>");
                 var ingredientArr = [];
                 var ingredientList = $("<ul>");
@@ -40,7 +44,6 @@ $(document).ready(function(){
                 var recipeIMG = $("<img>");
                 var renderDiv = addNewDiv();
                 var trashBtn = $("<button>");
-                var trashSpan = $("<span>");
                 var uList = $("<ul>");
 
                 function addNewDiv() {
@@ -70,7 +73,8 @@ $(document).ready(function(){
                         id: "IMG" + recipeObj.rID,
                         src: recipeObj.imgURL,
                         class: "mouseOn linkUrl savedImg",
-                        style: "height: 200px; width: 200px;"
+                        style: "height: 200px; width: 200px;",
+                        alt: "Image " + recipeObj.rID
                     });
                     anchor.append(recipeIMG);
                 };
@@ -83,7 +87,12 @@ $(document).ready(function(){
                         style: "font-size: 24px;"
                     });
                     formLabel.text('Comments for "' + recipeObj.title +'"');
-                    formText.attr("id", "Comment" + recipeObj.rID);
+                    formText.attr({
+                        id: "Comment" + recipeObj.rID,
+                        class: "form-control commentSave", 
+                        placeholder: "My Comments:", 
+                        rows: '6'
+                    });
                     renderDiv.append(commentDiv);
                     commentDiv.append(formLabel);
                     commentDiv.append(formText);
@@ -95,7 +104,7 @@ $(document).ready(function(){
                     ingredientBtn.attr({
                         class: "btn btn-default ingredientBtn",
                         title: "Ingredients",
-                        style: "display: inline-block;",
+                        style: "display: inline-block; width: 129.5px",
                         'data-toggle': "popover",
                         'data-content': uList.html()
                     });
@@ -121,9 +130,8 @@ $(document).ready(function(){
 
                 function constructTrashBtn(){
                     trashBtn.attr({
-                        class: "btn btn-default trashButton glyphicon glyphicon-trash",
-                        id: "trash" + recipeObj.rID,
-                        style: "font-size: 42px; float: right; color: rgb(177, 42, 42);"
+                        class: "btn btn-default trashButtonBox glyphicon glyphicon-trash",
+                        id: "trash" + recipeObj.rID
                     })
                     renderDiv.append(trashBtn);
                 }
@@ -162,6 +170,7 @@ $(document).ready(function(){
                         rId: ID
                     },
                 }).done(function (result){
+                    $("#historyAppend").parent().show();
                     recipeObj =  {
                         imgURL: JSON.parse(result).recipe.image_url,
                         title: JSON.parse(result).recipe.title,
@@ -196,7 +205,8 @@ $(document).ready(function(){
                             id: "IMG" + recipeObj.rID,
                             src: recipeObj.imgURL,
                             class: "historyItem",
-                            style: "height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;"
+                            style: "height: 50px; width: 50px; display: block; float: left; margin-left: auto; margin-right: auto;",
+                            alt: "Image " + recipeObj.rID
                         });
                         historyRender.append(anchor);
                         anchor.append(recipeIMG);
@@ -207,11 +217,9 @@ $(document).ready(function(){
         };
         generateHistoryItems();
     }
-// WHAT????
-    // console.log(searchedArr !== [], searchedArr);
 
     //Remove Saved recipeBox result
-    $(document).on("click", ".trashButton", function(){
+    $(document).on("click", ".trashButtonBox", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
         var removeIndex = storedRecipes.indexOf(removeThis);
         var saveId = $(this).siblings().children(".saveBtn").attr("id");
@@ -220,12 +228,14 @@ $(document).ready(function(){
         localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         $(this).parents().eq(0).remove();
         localStorage.removeItem(saveId, null);
+        $("#resultAppend:empty").parent().hide();
     })
 
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");
         $("#historyAppend").remove();
         $("#clearButton").parent().remove();
+        $("#historyAppend:empty").parent().hide();
     })
 //commit comment in textarea to LS
     $(document).on("click", ".saveBtn", function(){
