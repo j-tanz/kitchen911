@@ -1,80 +1,54 @@
 # Kitchen 911
 
-One Paragraph of project description goes here
+Designed by developers with professional Chef collaboration.
+
+Using a Food2Fork API, Kitchen 911 was created to help find creative recipe ideas along with sharing expert culinary help if needed. The website allows you to search for keywords that link to recipes from food2fork.com; however on Kitchen911, you are able to save those recipes in your "recipe box" (a feature), where the user can add their own personal notes about said recipe: "what worked," "what tweaks need to be made," and "what was the Chef's advice when I ran into a problem?" Futhermore, using the MIT firebase Firechat, users can contact personal and professional help in real time (another feature).
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+You should be able to download the files on your computer and run locally or access via our github pages link below:
+
+[Click me](https://github.com/twistyjeffrey/kitchen911)
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+No prior software needed to run.
 
-```
-Give examples
-```
+## Wire Frames
+### Homepage
+<p align="center">
+<img src="assets/images/brainstorming/recipeboxWF.jpg" alt="K911 RecipeBox Wire Frame"/>
+</p>
 
-### Installing
+### RecipeBox
+<p align="center">
+<img src="assets/images/brainstorming/homepageWF.jpg" alt="Homepage Wire Frame"/>
+</p>
 
-A step by step series of examples that tell you have to get a development env running
+## Site Preview
 
-Say what the step will be
+## Future Features
+* Login authentication
+* Search filter
 
-```
-Give the example
-```
+## Contributions
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Please feel free to branch off and make some tweaks and make a PR. We're open to any cool suggestions!
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* github
+* visual studio code
+* firebase
+* firechat
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+[Jeffrey Berman](https://github.com/twistyjeffrey)
+[Samidh Desai](https://github.com/SamDesai333)
+[John Tansor](https://github.com/j-tanz)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
@@ -82,7 +56,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Food2Fork
-* Firebase
-* Firechat (
+[Food2Fork](https://www.food2fork.com)
+[Firechat](https://github.com/firebase/firechat)
+[FIrebase](https://www.firebase.com)
+
 
