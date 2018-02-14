@@ -1,5 +1,6 @@
 body{
     margin:0;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 .navbar-custom {
@@ -11,14 +12,6 @@ body{
     color:white;
     align-items: center;  
 }
-
-/* .navbar-header {
-    float:left;
-}
-
-.nav{
-    float: right;
-} */
 
 .jumbotron {
     text-align: center;
@@ -216,7 +209,14 @@ textarea.commentSave {
 .hide {
     visibility: hidden;
 }
+.dropdown-menu {
+    background-color: rgb(36, 35, 35);
+    width: 300px;
+}
 
+#firechat .tab-pane-menu {
+    display: none;
+}
 
 
 #firechat-wrapper {
@@ -225,8 +225,7 @@ textarea.commentSave {
     padding: 10px;
     border: 1px solid #ccc;
     border-style: hidden;
-    background-color: #fff;
-    margin: 50px auto;
+    background-color: rgb(177, 42, 42);
     text-align: center;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
