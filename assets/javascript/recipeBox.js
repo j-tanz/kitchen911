@@ -108,7 +108,7 @@ $(document).ready(function(){
                 };
                 constructCommentBox();
 /**
- *  Creates a button that lists recipe ingredients. 
+ *  Creates a button that lists recipe ingredients, and appends to page.
  */  
                 function constructIngredientPopUp() {
                     ingredientBtn.text("Ingredients");
@@ -128,7 +128,7 @@ $(document).ready(function(){
                 };
                 constructIngredientPopUp();
 /**
- *  Saves comments to a recipe.
+ *  Creates a button to save comments and appends to page.
  */                  
                 function constructSaveBtn(){
                     newButton.text("Save Comments");
@@ -141,7 +141,7 @@ $(document).ready(function(){
                 };
                 constructSaveBtn();
 /**
- *  Removes the recipe(s) that are results from search.
+ *  Creates a button to remove an individual saved recipe, and appends to page.
  */  
                 function constructTrashBtn(){
                     trashBtn.attr({
@@ -153,7 +153,6 @@ $(document).ready(function(){
                 }
                 constructTrashBtn();
 
-
                 if (localStorage.getItem(commentKey) != null){
                     $("#" + "Comment" + recipeObj.rID).val(localStorage.getItem(commentKey));
                 }
@@ -161,7 +160,7 @@ $(document).ready(function(){
         }
     } 
 /**
- *   Clears saved searched results
+ *   Creates a button to clear search results, and appends to page.
  */  
     if (searchedArr.length !== 0){
         function constructClearSearchBtn(){
@@ -176,7 +175,7 @@ $(document).ready(function(){
         };
         constructClearSearchBtn();
 /**
- *   Makes an ajax call to food2fork and displays items searched
+ *   Makes an ajax call to food2fork to lookup items saved in local storage history array.
  */  
         function generateHistoryItems(){
             for ( var i = 0 ; i < searchedArr.length; i++ ) {
@@ -217,7 +216,7 @@ $(document).ready(function(){
                     return newDiv;
                     }
 /**
- *   Displays an image(s) for each recipe searched.
+ *   Creates images for each recipe searched and appends to page.
  */  
                     function constructHistoryItem() {
                         anchor.attr({
@@ -242,7 +241,7 @@ $(document).ready(function(){
     }
 
 /**
- *   Removes favorited recipes from page.
+ *   Removes stored recipe from page and associated local storage data .
  */
     $(document).on("click", ".trashButtonBox", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
@@ -256,7 +255,7 @@ $(document).ready(function(){
         $("#resultAppend:empty").parent().hide();
     })
 /**
- *   Removes saved search history.
+ *   Removes all search history from page and local storage.
  */  
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");

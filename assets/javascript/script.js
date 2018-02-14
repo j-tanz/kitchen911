@@ -13,7 +13,7 @@ $(document).ready(function(){
     // console.log(resultArr.length);
 
 /**
- *  Fetches recipe search term from page and makes ajax request to food2fork.
+ *  Fetches recipe search term from page and makes ajax request to food2fork API.
 */
     $("#searchBttn").on("click", function(event){
         event.preventDefault();
@@ -38,7 +38,7 @@ $(document).ready(function(){
         });
 
 /**
- *   Makes an ajax call to food2fork and fetches recipeObj.
+ *   Makes an ajax call to food2fork API and fetches recipeObj.
  */  
         function lookUpId() {
             for(var i = 0; i < resultArr.length; i++){
@@ -60,7 +60,6 @@ $(document).ready(function(){
                         source: JSON.parse(result).recipe.source_url
                     }
                
-
                     var anchor = $("<a>");
                     var buttonDiv = $("<div>");
                     var ingredientArr = [];
@@ -98,7 +97,7 @@ $(document).ready(function(){
                     }
     
 /**
- * Displays star(favorite) button.
+ * Creates star (favorite) button and appends to page.
  */     
                     function constructStarBtn(){
                         starBtn.attr({
@@ -111,7 +110,7 @@ $(document).ready(function(){
                     constructStarBtn();
 
 /**
- * Displays image from searched recipe. 
+ * Formats searched recipe result image as a link and appends to page. 
  */
                     function constructResultImg(){
                         anchor.attr({
@@ -130,7 +129,7 @@ $(document).ready(function(){
                     constructResultImg();
 
 /**
- * Displays trash button.
+ * Creates trash button and appends to page.
  */
                     function constructTrashBtn(){
                         trashBtn.attr({
@@ -142,10 +141,8 @@ $(document).ready(function(){
                     }
                     constructTrashBtn();
                  
-
-    
 /**
- *  Creates an ingredients button that displays "Ingredients" from the recipeObj.
+ *  Creates an ingredients button that displays "Ingredients" from the recipeObj and appends to page.
  */  
                     function constructIngrBtn(){
                         newButton.text("Ingredients");
@@ -162,8 +159,9 @@ $(document).ready(function(){
                         $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});      
                     }
                     constructIngrBtn();
+
 /**
- *   Displays title of searched recipe.
+ *   Appends title of searched recipe onto page.
  */  
                     function appendTitle(){
                         recipeTitle.text(recipeObj.title);
@@ -183,20 +181,20 @@ $(document).ready(function(){
             }    
         }
     });
+
 /**
- *  Listens for enter key and searches.
- */  
-    
+ *  Listens for enter key to trigger search.
+ */    
     $("#searchTerm").on("keyup", function(event){
         event.preventDefault();
         if (event.keyCode === 13) {
             $("#searchBttn").click();
         }
     })
-/**
- *  Gets information from the page and stores in array in local storage. 
- */  
 
+/**
+ *  Evaluates a recipe's ID and stores that value in local storage array. 
+ */  
     $(document).on("click", ".starBtn", function(){
         var storeThis = $(this).parents().eq(0).attr("id");
         if(storedRecipes.indexOf(storeThis) === -1){
@@ -204,8 +202,9 @@ $(document).ready(function(){
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         }
     })
+
 /**
- *  Trashes a result.
+ *  Removes a search result from the page.
  */  
     $(document).on("click", ".trashBtnSearch", function(){
         $(this).parents().eq(0).remove();
