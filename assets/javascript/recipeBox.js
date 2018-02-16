@@ -252,6 +252,7 @@ $(document).ready(function(){
         $(this).parents().eq(0).remove();
         localStorage.removeItem(saveId, null);
         $("#resultAppend:empty").parent().hide();
+        $(".popover").popover("hide");
     })
 /**
  *   Removes all search history from page and local storage.
