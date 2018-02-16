@@ -15,6 +15,7 @@ You should be able to download the files on your computer and run locally or acc
 No prior software needed to run.
 
 ## Wire Frames
+
 ### Homepage
 <p align="center">
 <img src="assets/images/brainstorming/recipeboxWF.jpg" alt="K911 RecipeBox Wire Frame"/>
@@ -26,6 +27,22 @@ No prior software needed to run.
 </p>
 
 ## Site Preview
+
+### Homepage
+<p align="center">
+<img src="assets/images/brainstorming/homepage.png" alt="K911 Homepage"/>
+</p>
+
+### RecipeBox
+<p align="center">
+<img src="assets/images/brainstorming/recipebox.png" alt="K911 RecipeBox"/>
+</p>
+
+### Chatbox
+<p align="center">
+<img src="assets/images/brainstorming/chatbox.png" alt="K911 chatbox"/>
+</p>
+
 
 ## Future Features
 * Login authentication
