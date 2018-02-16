@@ -47,7 +47,7 @@ $(document).ready(function(){
                 var uList = $("<ul>");
 
 /**
- *   Creates a new div that is filled with the search result.
+ *   Creates a new div for displaying a search result.
  *   @return {object} - div container for recipeObj.
  */                  
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
                     uList.append(listItem);
                 }
 /**
- *   Displays picture of recipe and adds a link to food2fork. 
+ *   Displays picture of recipe and adds a link to Recipe URL. 
  */  
                 function constructImg() {
                     anchor.attr({
@@ -113,7 +113,7 @@ $(document).ready(function(){
                 function constructIngredientPopUp() {
                     ingredientBtn.text("Ingredients");
                     ingredientBtn.attr({
-                        class: "btn btn-default ingredientBtn",
+                        class: "btn btn-default ingredientBtnBox",
                         title: "Ingredients",
                         style: "display: inline-block; width: 129.5px",
                         'data-toggle': "popover",
@@ -146,7 +146,6 @@ $(document).ready(function(){
                 function constructTrashBtn(){
                     trashBtn.attr({
                         class: "btn btn-default trashButtonBox glyphicon glyphicon-trash",
-                        style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                         id: "trash" + recipeObj.rID
                     })
                     renderDiv.append(trashBtn);
@@ -175,7 +174,7 @@ $(document).ready(function(){
         };
         constructClearSearchBtn();
 /**
- *   Makes an ajax call to food2fork to lookup items saved in local storage history array.
+ *   Makes an ajax call to food2fork API which queries items saved in local storage history array.
  */  
         function generateHistoryItems(){
             for ( var i = 0 ; i < searchedArr.length; i++ ) {

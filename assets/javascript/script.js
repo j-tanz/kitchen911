@@ -7,11 +7,7 @@ $(document).ready(function(){
     var searchedArr = [];
     var storedRecipes = JSON.parse(localStorage.getItem("storeArr")) || [];
  
-
     $("#resultAppend:empty").parent().hide();
-    
-    // console.log(resultArr.length);
-
 /**
  *  Fetches recipe search term from page and makes ajax request to food2fork API.
 */
@@ -36,7 +32,6 @@ $(document).ready(function(){
             }    
             lookUpId();       
         });
-
 /**
  *   Makes an ajax call to food2fork API and fetches recipeObj.
  */  
@@ -77,7 +72,6 @@ $(document).ready(function(){
  * Function to create a new <div/> & assignId = "div"rId#
  * @return {object} -  a div containing recipeObj.rID
  */  
-
                     function addNewDiv() {
                         var newDiv = $("<div>");
                         newDiv.attr({
@@ -102,7 +96,6 @@ $(document).ready(function(){
                     function constructStarBtn(){
                         starBtn.attr({
                             class: "btn btn-default glyphicon glyphicon-star-empty starBtn",
-                            style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                             id: "star" + recipeObj.rID
                         });
                         renderDiv.append(starBtn);
@@ -134,7 +127,6 @@ $(document).ready(function(){
                     function constructTrashBtn(){
                         trashBtn.attr({
                             class: "btn btn-default glyphicon glyphicon-trash trashBtnSearch",
-                            style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                             id: "trash" + recipeObj.rID
                         });
                         renderDiv.append(trashBtn);
@@ -169,8 +161,7 @@ $(document).ready(function(){
                         renderDiv.append(recipeTitle);     
                     };
                     appendTitle();
-
-     
+    
                     searchedArr = JSON.parse(localStorage.getItem("historyArr")) || [];
 
                     if(searchedArr.indexOf(recipeObj.rID) === -1){
@@ -181,7 +172,6 @@ $(document).ready(function(){
             }    
         }
     });
-
 /**
  *  Listens for enter key to trigger search.
  */    
@@ -191,7 +181,6 @@ $(document).ready(function(){
             $("#searchBttn").click();
         }
     })
-
 /**
  *  Evaluates a recipe's ID and stores that value in local storage array. 
  */  
@@ -202,7 +191,6 @@ $(document).ready(function(){
             localStorage.setItem("storeArr", JSON.stringify(storedRecipes));
         }
     })
-
 /**
  *  Removes a search result from the page.
  */  

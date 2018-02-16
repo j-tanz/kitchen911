@@ -1,7 +1,4 @@
-body{
-    margin:0;
-    font-family: 'Nanum Myeongjo', serif;
-}
+/* Navbar */
 
 .navbar-custom {
     padding:10px;
@@ -13,44 +10,84 @@ body{
     align-items: center;  
 }
 
-.jumbotron {
-    text-align: center;
-    height: 150px;
-    margin-bottom: 0;
-    background-image: url("http://www.fitgirlcode.com/wp-content/uploads/2015/01/462812_ovoshhi_stol_lozhki_derevyannye_griby_perec_kapust_1680x1050_www.GdeFon.ru_.jpg");
-    background-position: center;
-    color: rgb(221, 220, 220);
-    text-shadow: rgb(46, 44, 44) 0.4em 0.4em 0.4em;
-    padding-top: 120px;
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/* Main Content */
+
+body{
+    margin:0;
 }
 
-h1 {
-    position: relative;
-    top: -40px;
-}
+    h1 {
+        position: relative;
+        top: -40px;
+    }
 
-h2 {
-    position: relative;
-    top: -60px;
-    font-size: 150%;
-    color: rgb(255, 238, 0);
-}
+    h2 {
+        position: relative;
+        top: -60px;
+        font-size: 150%;
+        color: rgb(255, 238, 0);
+    }
 
-span {
-    color:rgb(177, 42, 42);
-}
+    p {
+        text-align: center;
+    }
 
-#formContainer {
+    li {
+        font-family: 'Nanum Myeongjo', serif;
+        font-weight: bold;
+    }
+
+    span {
+        color:rgb(177, 42, 42);
+    }
+
+    #formContainer {
+        background-color: rgb(36, 35, 35);
+        padding:20px;
+        border-radius: 0 !important;
+        border-bottom: 3px solid rgb(177, 42, 42);
+    }
+
+    .hide {
+        visibility: hidden;
+    }
+    
+    .jumbotron {
+        text-align: center;
+        height: 150px;
+        margin-bottom: 0;
+        background-image: url("http://www.fitgirlcode.com/wp-content/uploads/2015/01/462812_ovoshhi_stol_lozhki_derevyannye_griby_perec_kapust_1680x1050_www.GdeFon.ru_.jpg");
+        background-position: center;
+        color: rgb(221, 220, 220);
+        text-shadow: rgb(46, 44, 44) 0.4em 0.4em 0.4em;
+        padding-top: 120px;
+        font-family: 'Montserrat', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+/* Footer  */
+
+footer{
     background-color: rgb(36, 35, 35);
     padding:20px;
-    border-radius: 0 !important;
-    border-bottom: 3px solid rgb(177, 42, 42);
+    margin-top: 60px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: #ccc;
+    border-top: 3px solid rgb(177, 42, 42);
 }
+
+    #copyRight {
+        float: right;
+        position: relative;
+        top: 5px;
+    }
+
+/* Search Page */
 
 #resultsBox{
     background-color: rgb(36, 35, 35);
@@ -63,6 +100,83 @@ span {
     border-left-width:thin;
     border-right-width:thin;
     margin-bottom: 100px;
+}
+
+.dropdown-menu {
+    background-color: rgb(36, 35, 35);
+    width: 300px;
+}
+.starBtn {
+    height: 50px;
+    width: 50px;
+    border: none;
+    font-size: 28px;
+    position: absolute;
+    left: 6%;
+    top: 66%;
+    float: left;
+    border: 1px solid #021a40;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.starBtn:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 300%;
+    margin-left: -20% !important;
+    margin-top: -120%; 
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.starBtn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.starBtn:focus, .starBtn:visited {
+    opacity: 1;
+    background-color: rgb(243, 255, 134);
+}
+
+.ingredientBtn  {
+    border: 1px solid #021a40;
+    height: 50px;
+}
+
+.trashBtnSearch {
+    height: 50px;
+    width: 50px;
+    border: none;
+    font-size: 24px;
+    position: absolute;
+    right: 6%;
+    top: 66%;
+    float: right;
+    border: 1px solid #021a40;
+}
+
+.saveBtn {
+    border: 1px solid #021a40;
+}
+
+.recipeDesc {
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+}
+
+.ingredientBtnBox  {
+    border: 1px solid #021a40;
 }
 
 #favoritesBox{
@@ -93,63 +207,32 @@ span {
     margin-bottom: 100px;
 }
 
+#dropListNumResults{
+    padding:3px;
+    margin: 0;
+    border-radius:4px;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    appearance:none;
+    cursor:pointer;
+    height: 34px;
+}
+
 #historyAppend {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-content: space-around;
-    
+    align-content: space-around; 
 }
 
-footer{
-    background-color: rgb(36, 35, 35);
-    padding:20px;
-    margin-top: 60px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    color: #ccc;
-    border-top: 3px solid rgb(177, 42, 42);
+#chickenCook{
+    color: rgb(255, 238, 0);
 }
 
-.recipeDesc {
-    font-weight: bold;
-    text-align: center;
-    font-size: 16px;
-}
-
-.starBtn {
-    height: 65px;
-    width: 65px;
-    color: rgb(177, 42, 42);
-    border: none;
-    font-size: 48px;
-    position: absolute;
-    left: 3.5%;
-    top: 6%;
-    float: left;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    outline: none;
-    overflow: hidden;
-
-}
-
-.trashBtnSearch {
-    height: 65px;
-    width: 65px;
-    color: rgb(177, 42, 42);
-    border: none;
-    font-size: 48px;
-    position: absolute;
-    right: 3.5%;
-    top: 6%;
-    float: right;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    outline: none;
-    overflow: hidden;
-}
+/* Recipe Box Page */
 
 .savedImg {
     margin-left: auto;
@@ -166,25 +249,15 @@ footer{
     background-color: rgb(155, 94, 2);
 }
 
-.saveBtn, .ingredientBtn  {
-    /* padding: 1px; */
-    border: 1px solid #021a40;
-}
-
 .trashButtonBox{
     border: none;
     margin-left: auto;
     margin-right: auto;
     display: block;
     font-size: 42px;
-    color: rgb(177, 42, 42);
+    border: 1px solid #021a40;
     width: 35%;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    outline: none;
-    overflow: hidden;
 }
-
 
 textarea.commentSave {
     border: 1px solid #021a40;
@@ -197,45 +270,6 @@ textarea.commentSave {
     color: rgb(36, 0, 0);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bolder;
-}
-
-#copyRight {
-    float: right;
-    position: relative;
-    top: 5px;
-
-}
-
-.hide {
-    visibility: hidden;
-}
-.dropdown-menu {
-    background-color: rgb(36, 35, 35);
-    width: 300px;
-}
-
-#firechat .tab-pane-menu {
-    display: none;
-}
-
-
-#firechat-wrapper {
-    height: 475px;
-    max-width: 325px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-style: hidden;
-    background-color: rgb(177, 42, 42);
-    text-align: center;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    position: relative;
-
-}
-  
-p{
-    text-align: center;
 }
 
 .recipeImgMain {
@@ -256,15 +290,33 @@ p{
     background-color: rgba(226, 206, 206, 0.685);
 }
 
-#chickenCook{
-    color: rgb(255, 238, 0);
-}
-
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
 }
+
+/* FireChat */
+
+#firechat .tab-pane-menu {
+    display: none;
+}
+
+#firechat-wrapper {
+    height: 475px;
+    max-width: 325px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-style: hidden;
+    background-color: rgb(177, 42, 42);
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Media Queries */
 
 @media (min-width: 450px) {
     .recipeImgMain {
@@ -275,6 +327,7 @@ p{
     .result {
         height: 420px;
     }
+
     .recipeDesc {
         font-size: 24px;
     }
@@ -283,6 +336,15 @@ p{
         width: 78px;
     }
 
+    .trashBtnSearch {
+        right: 12%;
+        top: 67%;
+    }
+
+    .starBtn {
+        left: 12%;
+        top: 67%;
+    }
 }
 
 @media (min-width: 735px){
@@ -291,22 +353,40 @@ p{
 
     }
     .formLabel{
-        width: 75%;
+        width: 100%;
+        float: left;
     }
     .form-group {
-        width: 70%;
+        width: 55%;
     }  
     .savedImg {
         margin-left: auto; 
         margin-right: 20px; 
         display: block; 
         float: left;
+        margin-top: 30px;
+    }
+    .trashButtonBox{
+        position: absolute;
+        right: 2%;
+        top: 35%;
     }
 }
 
 @media (min-width: 992px){
-
     .formLabel {
         width: 100%;
+    }
+    .form-group {
+        width: 67%;
+    }
+    .trashButtonBox{
+        right:1%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form-group {
+        width: 73%;
     }
 }
