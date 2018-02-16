@@ -47,7 +47,7 @@ $(document).ready(function(){
                 var uList = $("<ul>");
 
 /**
- *   Creates a new div that is filled with the search result.
+ *   Creates a new div for displaying a search result.
  *   @return {object} - div container for recipeObj.
  */                  
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
                     uList.append(listItem);
                 }
 /**
- *   Displays picture of recipe and adds a link to food2fork. 
+ *   Displays picture of recipe and adds a link to Recipe URL. 
  */  
                 function constructImg() {
                     anchor.attr({
@@ -108,12 +108,12 @@ $(document).ready(function(){
                 };
                 constructCommentBox();
 /**
- *  Creates a button that lists recipe ingredients. 
+ *  Creates a button that lists recipe ingredients, and appends to page.
  */  
                 function constructIngredientPopUp() {
                     ingredientBtn.text("Ingredients");
                     ingredientBtn.attr({
-                        class: "btn btn-default ingredientBtn",
+                        class: "btn btn-default ingredientBtnBox",
                         title: "Ingredients",
                         style: "display: inline-block; width: 129.5px",
                         'data-toggle': "popover",
@@ -128,7 +128,7 @@ $(document).ready(function(){
                 };
                 constructIngredientPopUp();
 /**
- *  Saves comments to a recipe.
+ *  Creates a button to save comments and appends to page.
  */                  
                 function constructSaveBtn(){
                     newButton.text("Save Comments");
@@ -141,18 +141,16 @@ $(document).ready(function(){
                 };
                 constructSaveBtn();
 /**
- *  Removes the recipe(s) that are results from search.
+ *  Creates a button to remove an individual saved recipe, and appends to page.
  */  
                 function constructTrashBtn(){
                     trashBtn.attr({
                         class: "btn btn-default trashButtonBox glyphicon glyphicon-trash",
-                        style: "background-color: transparent; background-repeat: no-repeat; outline: none; overflow: hidden;",
                         id: "trash" + recipeObj.rID
                     })
                     renderDiv.append(trashBtn);
                 }
                 constructTrashBtn();
-
 
                 if (localStorage.getItem(commentKey) != null){
                     $("#" + "Comment" + recipeObj.rID).val(localStorage.getItem(commentKey));
@@ -161,7 +159,7 @@ $(document).ready(function(){
         }
     } 
 /**
- *   Clears saved searched results
+ *   Creates a button to clear search results, and appends to page.
  */  
     if (searchedArr.length !== 0){
         function constructClearSearchBtn(){
@@ -176,7 +174,7 @@ $(document).ready(function(){
         };
         constructClearSearchBtn();
 /**
- *   Makes an ajax call to food2fork and displays items searched
+ *   Makes an ajax call to food2fork API which queries items saved in local storage history array.
  */  
         function generateHistoryItems(){
             for ( var i = 0 ; i < searchedArr.length; i++ ) {
@@ -217,7 +215,7 @@ $(document).ready(function(){
                     return newDiv;
                     }
 /**
- *   Displays an image(s) for each recipe searched.
+ *   Creates images for each recipe searched and appends to page.
  */  
                     function constructHistoryItem() {
                         anchor.attr({
@@ -242,7 +240,7 @@ $(document).ready(function(){
     }
 
 /**
- *   Removes favorited recipes from page.
+ *   Removes stored recipe from page and associated local storage data .
  */
     $(document).on("click", ".trashButtonBox", function(){
         var removeThis = $(this).parents().eq(0).attr("id");
@@ -256,7 +254,7 @@ $(document).ready(function(){
         $("#resultAppend:empty").parent().hide();
     })
 /**
- *   Removes saved search history.
+ *   Removes all search history from page and local storage.
  */  
     $(document).on("click", "#clearButton", function(){
         localStorage.removeItem("historyArr");

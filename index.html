@@ -51,15 +51,16 @@
                 <form align = "center" class="form-inline" id="form-stuff" onSubmit="return false;">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search Recipe Here" id ="searchTerm">
-                        <button type="submit" class="btn btn-default" id ="searchBttn">Search</button>
-                        <select id="dropListNumResults">
-
+                        <select id="dropListNumResults" style="height: 34px; border: 1px solid black">
+                            <option selected> Number of Results </option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="6">6</option>
                             <option value="8">8</option>
                         </select>
+                        <button type="submit" class="btn btn-default" id ="searchBttn">Search</button>
+
                     </div>
                 </form>  
             </div>      
