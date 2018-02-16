@@ -67,7 +67,6 @@ $(document).ready(function(){
                     var starBtn = $("<button>");
                     var trashBtn = $("<button>");
                     var uList = $("<ul>");
-
 /**
  * Function to create a new <div/> & assignId = "div"rId#
  * @return {object} -  a div containing recipeObj.rID
@@ -89,7 +88,6 @@ $(document).ready(function(){
                         listItem.text(singleIngredient); 
                         uList.append(listItem);
                     }
-    
 /**
  * Creates star (favorite) button and appends to page.
  */     
@@ -101,7 +99,6 @@ $(document).ready(function(){
                         renderDiv.append(starBtn);
                     };
                     constructStarBtn();
-
 /**
  * Formats searched recipe result image as a link and appends to page. 
  */
@@ -120,7 +117,6 @@ $(document).ready(function(){
                         anchor.append(recipeIMG);
                     };
                     constructResultImg();
-
 /**
  * Creates trash button and appends to page.
  */
@@ -131,8 +127,7 @@ $(document).ready(function(){
                         });
                         renderDiv.append(trashBtn);
                     }
-                    constructTrashBtn();
-                 
+                    constructTrashBtn();             
 /**
  *  Creates an ingredients button that displays "Ingredients" from the recipeObj and appends to page.
  */  
@@ -151,7 +146,6 @@ $(document).ready(function(){
                         $('[data-toggle="popover"]').popover({ html : true, content : uList, container : "body"});      
                     }
                     constructIngrBtn();
-
 /**
  *   Appends title of searched recipe onto page.
  */  

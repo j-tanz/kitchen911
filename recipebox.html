@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-   
-
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-    <!-- Firechat -->
-    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
-    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
-    <!-- bootstrap script file -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- google fonts -->
+<!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700" rel="stylesheet">
+<!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<!-- Firechat -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+<!-- Bootstrap script file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Kitchen911</title>
 </head>
 <body>
@@ -63,7 +62,6 @@
                 </div>
             </div>
     </div>
-
     <footer class="container-fluid button-left">
         <div class="dropup">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="position: absolute; left: 0;">
@@ -77,6 +75,8 @@
     </footer>
     <!-- CODE CREDIT TO MIT -->
     <script type="text/javascript">
+        // Initialize Firebase SDK
+        // Initialize Firebase
       var config = {
         apiKey: "AIzaSyDT32Zn49c358zhzpUVWbhMM0gs_FTjbHk",
         authDomain: "kitchen-911.firebaseapp.com",
@@ -85,9 +85,6 @@
         storageBucket: "kitchen-911.appspot.com",
         messagingSenderId: "416579002605"
       };
-/**
- * 
- */
       firebase.initializeApp(config);
         // Get a reference to the Firebase Realtime Database
         var chatRef = firebase.database().ref();
@@ -103,11 +100,9 @@
             firebase.auth().signInAnonymously().catch(function(error) {
               console.log("Error signing user in anonymously:", error);
             });
-          }
-          
+          }    
         });
-      </script>
-     <script src="assets/javascript/recipeBox.js"></script>
-    
+    </script>
+    <script src="assets/javascript/recipeBox.js"></script>
 </body>
 </html>
