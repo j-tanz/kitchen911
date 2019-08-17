@@ -1,8 +1,8 @@
 # Kitchen 911
 
-Designed by developers with professional Chef collaboration.
+Designed in collaboration with a professional Chef!
 
-Using a Food2Fork API, Kitchen 911 was created to help find creative recipe ideas along with sharing expert culinary help if needed. The website allows you to search for keywords that link to recipes from food2fork.com; however on Kitchen911, you are able to save those recipes in your "recipe box" (a feature), where the user can add their own personal notes about said recipe: "what worked," "what tweaks need to be made," and "what was the Chef's advice when I ran into a problem?" Futhermore, using the MIT firebase Firechat, users can contact personal and professional help in real time (another feature).
+Using a Food2Fork API, Kitchen 911 was created to help find creative recipe ideas along with sharing expert culinary help if needed. This application allows the user to search keywords for recipes from food2fork.com. Users are then able to save selected recipes in a "recipe box", where the user can then add their own personal notes about individual recipes.  Additionally, we implementated a chat function (using the MIT firebase Firechat) to enable users to contact personal and professional help in real time!
 
 ## Getting Started
 
@@ -37,7 +37,6 @@ Using a Food2Fork API, Kitchen 911 was created to help find creative recipe idea
 <img src="assets/images/brainstorming/chatbox.png" alt="K911 chatbox"/>
 </p>
 
-
 ## Future Features
 * Login authentication
 * Search filter
@@ -45,13 +44,6 @@ Using a Food2Fork API, Kitchen 911 was created to help find creative recipe idea
 ## Contributions
 
 Please feel free to branch off and make some tweaks and make a PR. We're open to any cool suggestions!
-
-## Built With
-
-* javaScript
-* firebase
-* firechat
-
 
 ## Authors
 
@@ -66,8 +58,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-[Food2Fork](https://www.food2fork.com)
-[Firechat](https://github.com/firebase/firechat)
-[FIrebase](https://www.firebase.com)
+- [Food2Fork](https://www.food2fork.com)
+- [Firechat](https://github.com/firebase/firechat)
+- [FIrebase](https://www.firebase.com)
 
 
