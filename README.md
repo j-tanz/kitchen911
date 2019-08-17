@@ -6,13 +6,7 @@ Using a Food2Fork API, Kitchen 911 was created to help find creative recipe idea
 
 ## Getting Started
 
-You should be able to download the files on your computer and run locally or access via our github pages link below:
-
-[Click me](https://github.com/twistyjeffrey/kitchen911)
-
-### Prerequisites
-
-No prior software needed to run.
+[Open Kitchen911](https://j-tanz.github.io/kitchen911/index.html)
 
 ## Wire Frames
 
@@ -54,17 +48,16 @@ Please feel free to branch off and make some tweaks and make a PR. We're open to
 
 ## Built With
 
-* github
-* visual studio code
+* javaScript
 * firebase
 * firechat
 
 
 ## Authors
 
-[Jeffrey Berman](https://github.com/twistyjeffrey)
-[Samidh Desai](https://github.com/SamDesai333)
-[John Tansor](https://github.com/j-tanz)
+- [Jeffrey Berman](https://github.com/twistyjeffrey)
+- [Samidh Desai](https://github.com/SamDesai333)
+- [John Tansor](https://github.com/j-tanz)
 
 
 ## License
