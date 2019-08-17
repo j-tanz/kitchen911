@@ -2,7 +2,11 @@
 
 Designed in collaboration with a professional Chef!
 
-Using a Food2Fork API, Kitchen 911 was created to help find creative recipe ideas along with sharing expert culinary help if needed. This application allows the user to search keywords for recipes from food2fork.com. Users are then able to save selected recipes in a "recipe box", where the user can then add their own personal notes about individual recipes.  Additionally, we implementated a chat function (using the MIT firebase Firechat) to enable users to contact personal and professional help in real time!
+Using Food2Fork's API, Kitchen 911 was created to help find creative recipe ideas and to share expert culinary help. 
+
+This application allows the user to search keywords for recipes from food2fork.com. Users are then able to save selected recipes in a "recipe box", where the user can then add their own personal notes about individual recipes.  
+
+Additionally, we implementated a chat function (using the MIT firebase Firechat) to enable users to contact personal and professional help in real time!
 
 ## Getting Started
 
